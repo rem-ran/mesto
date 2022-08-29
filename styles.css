@@ -1,0 +1,39 @@
+.page {
+  background-color: #000000;
+}
+
+.line {
+  outline: solid 1px red;
+}
+
+.header {
+}
+
+.header__container {
+  max-width: 880px;
+  min-height: 74px;
+  margin: auto;
+  margin-top: 45px;
+  border-bottom: solid 1px #343333ed;
+}
+
+@media screen and (max-width: 767px) {
+  .header__container {
+    max-width: 320px;
+    min-height: 56px;
+    margin-top: 28px;
+  }
+}
+
+.header__logo {
+  width: 142px;
+  height: 33px;
+  z-index: 1;
+}
+
+@media screen and (max-width: 767px) {
+  .header__logo {
+    width: 104px;
+    height: 24px;
+  }
+}
