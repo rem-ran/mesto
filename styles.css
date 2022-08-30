@@ -19,7 +19,7 @@
 
 @media screen and (max-width: 767px) {
   .header__container {
-    max-width: 320px;
+    max-width: 266px;
     min-height: 56px;
     margin-top: 28px;
   }
@@ -35,5 +35,25 @@
   .header__logo {
     width: 104px;
     height: 24px;
+  }
+}
+
+.footer__note {
+  margin: 0 auto;
+  font: normal 400 18px/1.22 "Inter", Arial, Helvetica, sans-serif;
+  color: #545454;
+  max-width: 880px;
+  margin-top: 67px;
+  margin-bottom: 60px;
+}
+
+@media screen and (max-width: 767px) {
+  .footer__note {
+    font-size: 14px;
+    line-height: 1.21;
+    color: #545454;
+    max-width: 282px;
+    margin-top: 48px;
+    margin-bottom: 36px;
   }
 }
