@@ -17,6 +17,12 @@
   border-bottom: solid 1px #343333ed;
 }
 
+@media screen and (max-width: 1023px) {
+  .header__container {
+    max-width: 581px;
+  }
+}
+
 @media screen and (max-width: 767px) {
   .header__container {
     max-width: 266px;
@@ -38,6 +44,68 @@
   }
 }
 
+.cards__container {
+  list-style: none;
+  padding-left: 0;
+  display: grid;
+  max-width: 880px;
+  margin: auto;
+  margin-top: 47.25px;
+  column-gap: 17px;
+  row-gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(282px, 1fr));
+}
+
+@media screen and (max-width: 1023px) {
+  .cards__container {
+    max-width: 581px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .cards__container {
+    margin-top: 36px;
+    max-width: 282px;
+  }
+}
+
+.card {
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.card__image {
+  width: 282px;
+  height: 282px;
+  display: block;
+}
+
+.card__text-box {
+  display: flex;
+  background-color: #ffffff;
+  /* width: 242px; */
+  height: 79px;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.card__heading {
+  margin: 0;
+  font: normal 900 24px/1.21 "Inter", Arial, Helvetica, sans-serif;
+  color: #000000;
+  max-width: 190px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.card__like-icon {
+  width: 22px;
+  height: 19px;
+}
+
 .footer__note {
   margin: 0 auto;
   font: normal 400 18px/1.22 "Inter", Arial, Helvetica, sans-serif;
@@ -45,6 +113,12 @@
   max-width: 880px;
   margin-top: 67px;
   margin-bottom: 60px;
+}
+
+@media screen and (max-width: 1023px) {
+  .footer__note {
+    max-width: 581px;
+  }
 }
 
 @media screen and (max-width: 767px) {
