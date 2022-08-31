@@ -152,6 +152,12 @@
   min-height: 22px;
   display: flex;
   align-items: center;
+  transition: linear 0.3s;
+}
+
+.profile__name-edit-button:hover {
+  opacity: 0.6;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 767px) {
@@ -201,6 +207,12 @@
   min-height: 46px;
   display: flex;
   align-items: center;
+  transition: linear 0.3s;
+}
+
+.profile__add-button:hover {
+  opacity: 0.6;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 767px) {
@@ -284,6 +296,12 @@
 .card__like-icon {
   width: 22px;
   height: 19px;
+  transition: linear 0.3s;
+}
+
+.card__like-icon:hover {
+  opacity: 0.5;
+  cursor: pointer;
 }
 
 .footer__note {
