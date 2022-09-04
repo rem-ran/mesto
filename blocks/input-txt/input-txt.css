@@ -1,0 +1,15 @@
+.input-txt {
+  font: normal 400 14px/1.21 "Inter", Arial, Helvetica, sans-serif;
+  width: 354px;
+  height: 43px;
+  border-style: none;
+  border-bottom: 1px solid #bcbcbc;
+  margin: 0;
+  margin-top: 20px;
+}
+
+@media screen and (max-width: 767px) {
+  .input-txt {
+    width: 234px;
+  }
+}

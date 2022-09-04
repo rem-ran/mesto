@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./pages/index.css" />
+    <title>Место</title>
+  </head>
+  <body class="page">
+    <!-- шапка -->
+    <header class="header">
+      <div class="header__container">
+        <img
+          class="header__logo"
+          src="./images/header-logo.svg"
+          alt="логотип Mesto Russia белого цвета"
+        />
+      </div>
+    </header>
+    <main>
+      <!-- секция профиля -->
+      <section class="profile">
+        <div class="profile__container">
+          <div class="profile__image-text">
+            <div class="profile__image-box">
+              <img
+                class="profile__image"
+                src="./images/kusto-portrait.png"
+                alt="аватарка"
+              />
+            </div>
+            <div class="profile__text-box">
+              <div class="profile__name-edit-box">
+                <h1 class="profile__name">Жак-Ив Кусто</h1>
+                <!-- кнопка редактирования имени и профессии профиля -->
+                <button class="profile__edit-btn"></button>
+              </div>
+              <p class="profile__profession">Исследователь океана</p>
+            </div>
+          </div>
+          <!-- кнопка добавления -->
+          <button class="profile__add-btn"></button>
+        </div>
+      </section>
+      <!-- секция с карточками-картинками и лайком -->
+      <section class="cards">
+        <ul class="cards__container">
+          <li class="card">
+            <img
+              class="card__image"
+              src="./images/card-karachaevsk.png"
+              alt="Старинный, каменный, трёхэтажный, полуразрушенный дом на фоне зелёной горной местности "
+            />
+            <div class="card__text-box">
+              <h2 class="card__heading">Карачаево-Черкесия</h2>
+              <button class="card__like-btn"></button>
+            </div>
+          </li>
+          <li class="card">
+            <img
+              class="card__image"
+              src="./images/card-baikal.png"
+              alt="Вид на скалистый берег замёрсшего озера"
+            />
+            <div class="card__text-box">
+              <h2 class="card__heading">Байкал</h2>
+              <button class="card__like-btn"></button>
+            </div>
+          </li>
+          <li class="card">
+            <img
+              class="card__image"
+              src="./images/card-dombai.png"
+              alt="заснеженная гора на фоне серого неба на заднем плане и пожелтевший лес на золмах на переднем"
+            />
+            <div class="card__text-box">
+              <h2 class="card__heading">Домбай</h2>
+              <button class="card__like-btn"></button>
+            </div>
+          </li>
+          <li class="card">
+            <img
+              class="card__image"
+              src="./images/card-kamchatka.png"
+              alt="вулканистый желтый берег синего моря и заснеженные сопки на заднем плане"
+            />
+            <div class="card__text-box">
+              <h2 class="card__heading">Камчатка</h2>
+              <button class="card__like-btn"></button>
+            </div>
+          </li>
+          <li class="card">
+            <img
+              class="card__image"
+              src="./images/card-elbrus.png"
+              alt="Пустынная местность на закате и темная гора где-то далеко на заднем плане"
+            />
+            <div class="card__text-box">
+              <h2 class="card__heading">Эльбрус</h2>
+              <button class="card__like-btn"></button>
+            </div>
+          </li>
+          <li class="card">
+            <img
+              class="card__image"
+              src="./images/card-reka-kucherla.png"
+              alt="Колея от машины в траве вдоль зелёного ушелья, ведущего к заснеженным горам "
+            />
+            <div class="card__text-box">
+              <h2 class="card__heading">Алтай</h2>
+              <button class="card__like-btn"></button>
+            </div>
+          </li>
+        </ul>
+      </section>
+    </main>
+    <!-- подвал -->
+    <footer class="footer">
+      <p class="footer__note">&copy; 2020 Mesto Russia</p>
+    </footer>
+    <!-- секция с попапом -->
+    <section class="overlay">
+      <div class="popup">
+        <div class="popup__container">
+          <h2 class="popup__heading">Редактировать профиль</h2>
+          <input
+            class="input-txt input-txt_type_name"
+            type="text"
+            onkeypress="handleKeyPress(event)"
+          />
+          <input
+            class="input-txt input-txt_type_profession"
+            type="text"
+            onkeypress="handleKeyPress(event)"
+          />
+          <!-- кнопка сохранения данных попапа -->
+          <button class="popup__save-btn">Сохранить</button>
+          <!-- кнопка закрытия попапа без созранения данных -->
+          <button class="popup__close-btn"></button>
+        </div>
+      </div>
+    </section>
+    <script src="/scripts/index.js"></script>
+  </body>
+</html>

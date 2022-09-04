@@ -1,0 +1,20 @@
+.profile__profession {
+  font: normal 400 18px/1.22 "Inter", Arial, Helvetica, sans-serif;
+  margin: 0;
+  margin-top: 16px;
+  color: #ffffff;
+  word-wrap: break-word;
+}
+
+@media screen and (max-width: 1023px) {
+  .profile__profession {
+    font-size: 14px;
+    line-height: 1.21;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .profile__profession {
+    margin-top: 14px;
+  }
+}

@@ -1,0 +1,9 @@
+.card__heading {
+  margin: 0;
+  font: normal 900 24px/1.21 "Inter", Arial, Helvetica, sans-serif;
+  color: #000000;
+  max-width: 190px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
