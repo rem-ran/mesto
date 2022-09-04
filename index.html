@@ -3,10 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- /*<link rel="stylesheet" href="./pages/index.css" /> -->
-    <link rel="stylesheet" href="/vendor/normalize.css" />
-    <link rel="stylesheet" href="/styles.css" />
-    <link rel="stylesheet" href="/vendor/fonts/_inter/fonts_inter.css" />
+    <link rel="stylesheet" href="./pages/index.css" />
     <title>Место</title>
   </head>
   <body class="page">
@@ -33,7 +30,7 @@
               />
             </div>
             <div class="profile__text-box">
-              <div class="profile__name-edit-btn">
+              <div class="profile__name-edit-box">
                 <h1 class="profile__name">Жак-Ив Кусто</h1>
                 <!-- кнопка редактирования имени и профессии профиля -->
                 <button class="profile__edit-btn"></button>
@@ -126,8 +123,16 @@
       <div class="popup">
         <div class="popup__container">
           <h2 class="popup__heading">Редактировать профиль</h2>
-          <input class="input__txt input__txt_type_name" type="text" />
-          <input class="input__txt input__txt_type_profession" type="text" />
+          <input
+            class="input-txt input-txt_type_name"
+            type="text"
+            onkeypress="handleKeyPress(event)"
+          />
+          <input
+            class="input-txt input-txt_type_profession"
+            type="text"
+            onkeypress="handleKeyPress(event)"
+          />
           <!-- кнопка сохранения данных попапа -->
           <button class="popup__save-btn">Сохранить</button>
           <!-- кнопка закрытия попапа без созранения данных -->

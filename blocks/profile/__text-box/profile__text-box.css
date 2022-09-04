@@ -1,0 +1,17 @@
+.profile__text-box {
+  max-width: 500px;
+  /*поставил на своё усмотрение, чтобы текст начинал переноситься 
+   на новую строку, не доходя вплотную до кнопки*/
+}
+
+@media screen and (max-width: 1023px) {
+  .profile__text-box {
+    max-width: 250px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .profile__text-box {
+    margin-top: 22.25px;
+  }
+}
