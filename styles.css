@@ -6,9 +6,6 @@
   outline: solid 1px red;
 }
 
-.header {
-}
-
 .header__container {
   max-width: 880px;
   min-height: 74px;
@@ -121,7 +118,7 @@
   }
 }
 
-.profile__name-icon {
+.profile__name-edit-btn {
   display: flex;
   align-items: center;
 }
@@ -131,6 +128,9 @@
   margin: 0;
   color: #ffffff;
   margin-right: 18px;
+  display: block;
+  max-width: 500px;
+  word-wrap: break-word;
 }
 
 @media screen and (max-width: 1023px) {
@@ -145,9 +145,13 @@
   }
 }
 
-.profile__name-edit-button {
+.profile__edit-btn {
   border: solid 1px #ffffff;
-  object-fit: none;
+  background-color: #000000;
+  background: no-repeat url("./images/edit-icon.svg");
+  background-size: 10px, 10px;
+  background-position: 50%, 50%;
+  padding: 0;
   min-width: 22px;
   min-height: 22px;
   display: flex;
@@ -155,28 +159,16 @@
   transition: linear 0.3s;
 }
 
-.profile__name-edit-button:hover {
+.profile__edit-btn:hover {
   opacity: 0.6;
   cursor: pointer;
 }
 
 @media screen and (max-width: 767px) {
-  .profile__name-edit-button {
+  .profile__edit-btn {
     width: 16px;
     height: 16px;
-  }
-}
-
-.profile__name-edit-icon {
-  margin: auto;
-  width: 10px;
-  height: 10px;
-}
-
-@media screen and (max-width: 767px) {
-  .profile__name-edit-icon {
-    width: 7.5px;
-    height: 7.5px;
+    background-size: 7.5px, 7.5px;
   }
 }
 
@@ -185,6 +177,7 @@
   margin: 0;
   margin-top: 16px;
   color: #ffffff;
+  word-wrap: break-word;
 }
 
 @media screen and (max-width: 1023px) {
@@ -200,8 +193,13 @@
   }
 }
 
-.profile__add-button {
+.profile__add-btn {
   border: solid 2px #ffffff;
+  background-color: #000000;
+  background: no-repeat url("./images/add-icon.svg");
+  background-position: 50% 50%;
+  background-size: 22px 22px;
+  padding: 0;
   border-radius: 2px;
   min-width: 146px;
   min-height: 46px;
@@ -210,29 +208,17 @@
   transition: linear 0.3s;
 }
 
-.profile__add-button:hover {
+.profile__add-btn:hover {
   opacity: 0.6;
   cursor: pointer;
 }
 
 @media screen and (max-width: 767px) {
-  .profile__add-button {
+  .profile__add-btn {
+    background-size: 16px 16px;
     width: 278px;
     height: 46px;
     margin-top: 36px;
-  }
-}
-
-.profile__add-icon {
-  margin: auto;
-  width: 22px;
-  height: 22px;
-}
-
-@media screen and (max-width: 767px) {
-  .profile__add-icon {
-    width: 16px;
-    height: 16px;
   }
 }
 
@@ -240,6 +226,10 @@
   display: none;
   align-items: center;
   margin: auto;
+}
+
+.popup_opened {
+  display: flex;
 }
 
 .popup::before {
@@ -293,7 +283,7 @@
   }
 }
 
-.popup__input-txt {
+.input__txt {
   font: normal 400 14px/1.21 "Inter", Arial, Helvetica, sans-serif;
   width: 354px;
   height: 43px;
@@ -304,21 +294,22 @@
 }
 
 @media screen and (max-width: 767px) {
-  .popup__input-txt {
+  .input__txt {
     width: 234px;
   }
 }
 
 .popup__save-btn {
-  display: flex;
-  align-items: center;
   background-color: #000000;
   border-radius: 2px;
   width: 358px;
   min-height: 50px;
+  padding: 0;
   margin-bottom: 37px;
   margin-top: 48px;
   transition: linear 0.3s;
+  font: normal 400 18px/1.22 "Inter", Arial, Helvetica, sans-serif;
+  color: #ffffff;
 }
 
 @media screen and (max-width: 767px) {
@@ -335,13 +326,11 @@
   cursor: pointer;
 }
 
-.popup__save-txt {
-  font: normal 400 18px/1.22 "Inter", Arial, Helvetica, sans-serif;
-  color: #ffffff;
-  margin: 0 auto;
-}
-
 .popup__close-btn {
+  background: no-repeat url("./images/close-icon.svg");
+  background-size: contain;
+  padding: 0;
+  border: none;
   width: 32px;
   height: 32px;
   position: absolute;
@@ -421,15 +410,23 @@
   overflow: hidden;
 }
 
-.card__like-icon {
+.card__like-btn {
+  background: no-repeat url("./images/like-icon.svg");
+  background-size: contain;
+  padding: 0;
   width: 22px;
   height: 19px;
+  border: none;
   transition: linear 0.3s;
 }
 
-.card__like-icon:hover {
+.card__like-btn:hover {
   opacity: 0.5;
   cursor: pointer;
+}
+
+.card__like-icon_active {
+  background: no-repeat url("./images/like-icon-active.svg");
 }
 
 .footer__note {

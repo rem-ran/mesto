@@ -10,6 +10,7 @@
     <title>Место</title>
   </head>
   <body class="page">
+    <!-- шапка -->
     <header class="header">
       <div class="header__container">
         <img
@@ -20,6 +21,7 @@
       </div>
     </header>
     <main>
+      <!-- секция профиля -->
       <section class="profile">
         <div class="profile__container">
           <div class="profile__image-text">
@@ -31,43 +33,19 @@
               />
             </div>
             <div class="profile__text-box">
-              <div class="profile__name-icon">
+              <div class="profile__name-edit-btn">
                 <h1 class="profile__name">Жак-Ив Кусто</h1>
-                <div class="profile__name-edit-button">
-                  <img
-                    class="profile__name-edit-icon"
-                    src="./images/edit-icon.svg"
-                    alt="иконка в виде карандаша"
-                  />
-                </div>
+                <!-- кнопка редактирования имени и профессии профиля -->
+                <button class="profile__edit-btn"></button>
               </div>
               <p class="profile__profession">Исследователь океана</p>
             </div>
           </div>
-          <div class="profile__add-button">
-            <img
-              class="profile__add-icon"
-              src="./images/add-icon.svg"
-              alt="иконка в виде плюсика"
-            />
-          </div>
+          <!-- кнопка добавления -->
+          <button class="profile__add-btn"></button>
         </div>
       </section>
-      <section class="popup">
-        <div class="popup__container">
-          <h2 class="popup__heading">Редактировать профиль</h2>
-          <input class="popup__input-txt" type="text" />
-          <input class="popup__input-txt" type="text" />
-          <div class="popup__save-btn">
-            <p class="popup__save-txt">Сохранить</p>
-          </div>
-          <img
-            class="popup__close-btn"
-            src="./images/close-icon.svg"
-            alt="иконка в виде врестика"
-          />
-        </div>
-      </section>
+      <!-- секция с карточками-картинками и лайком -->
       <section class="cards">
         <ul class="cards__container">
           <li class="card">
@@ -78,11 +56,7 @@
             />
             <div class="card__text-box">
               <h2 class="card__heading">Карачаево-Черкесия</h2>
-              <img
-                class="card__like-icon"
-                src="./images/like-icon.svg"
-                alt="Иконка сердца"
-              />
+              <button class="card__like-btn"></button>
             </div>
           </li>
           <li class="card">
@@ -93,11 +67,7 @@
             />
             <div class="card__text-box">
               <h2 class="card__heading">Байкал</h2>
-              <img
-                class="card__like-icon"
-                src="./images/like-icon.svg"
-                alt="Иконка сердца"
-              />
+              <button class="card__like-btn"></button>
             </div>
           </li>
           <li class="card">
@@ -108,11 +78,7 @@
             />
             <div class="card__text-box">
               <h2 class="card__heading">Домбай</h2>
-              <img
-                class="card__like-icon"
-                src="./images/like-icon.svg"
-                alt="Иконка сердца"
-              />
+              <button class="card__like-btn"></button>
             </div>
           </li>
           <li class="card">
@@ -123,11 +89,7 @@
             />
             <div class="card__text-box">
               <h2 class="card__heading">Камчатка</h2>
-              <img
-                class="card__like-icon"
-                src="./images/like-icon.svg"
-                alt="Иконка сердца"
-              />
+              <button class="card__like-btn"></button>
             </div>
           </li>
           <li class="card">
@@ -138,11 +100,7 @@
             />
             <div class="card__text-box">
               <h2 class="card__heading">Эльбрус</h2>
-              <img
-                class="card__like-icon"
-                src="./images/like-icon.svg"
-                alt="Иконка сердца"
-              />
+              <button class="card__like-btn"></button>
             </div>
           </li>
           <li class="card">
@@ -153,18 +111,30 @@
             />
             <div class="card__text-box">
               <h2 class="card__heading">Алтай</h2>
-              <img
-                class="card__like-icon"
-                src="./images/like-icon.svg"
-                alt="Иконка сердца"
-              />
+              <button class="card__like-btn"></button>
             </div>
           </li>
         </ul>
       </section>
     </main>
+    <!-- подвал -->
     <footer class="footer">
       <p class="footer__note">&copy; 2020 Mesto Russia</p>
     </footer>
+    <!-- секция с попапом -->
+    <section class="overlay">
+      <div class="popup">
+        <div class="popup__container">
+          <h2 class="popup__heading">Редактировать профиль</h2>
+          <input class="input__txt input__txt_type_name" type="text" />
+          <input class="input__txt input__txt_type_profession" type="text" />
+          <!-- кнопка сохранения данных попапа -->
+          <button class="popup__save-btn">Сохранить</button>
+          <!-- кнопка закрытия попапа без созранения данных -->
+          <button class="popup__close-btn"></button>
+        </div>
+      </div>
+    </section>
+    <script src="/scripts/index.js"></script>
   </body>
 </html>
