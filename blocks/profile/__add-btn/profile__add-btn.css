@@ -6,8 +6,8 @@
   background-size: 22px 22px;
   padding: 0;
   border-radius: 2px;
-  min-width: 146px;
-  min-height: 46px;
+  width: 146px;
+  height: 46px;
   display: flex;
   align-items: center;
   transition: linear 0.3s;
