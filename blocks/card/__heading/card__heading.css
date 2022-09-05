@@ -1,6 +1,9 @@
 .card__heading {
   margin: 0;
-  font: normal 900 24px/1.21 "Inter", Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 1.21;
   color: #000000;
   max-width: 190px;
   text-overflow: ellipsis;

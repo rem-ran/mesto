@@ -1,7 +1,7 @@
 .profile__container {
   max-width: 880px;
   margin: auto;
-  margin-top: 36.25px;
+  margin-top: 36px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -10,7 +10,7 @@
 @media screen and (max-width: 1023px) {
   .profile__container {
     max-width: 581px;
-    margin-top: 38.25px;
+    margin-top: 38px;
   }
 }
 

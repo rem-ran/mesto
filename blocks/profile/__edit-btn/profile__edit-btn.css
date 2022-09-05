@@ -5,8 +5,8 @@
   background-size: 10px, 10px;
   background-position: 50%, 50%;
   padding: 0;
-  min-width: 22px;
-  min-height: 22px;
+  width: 22px;
+  height: 22px;
   display: flex;
   align-items: center;
   transition: linear 0.3s;

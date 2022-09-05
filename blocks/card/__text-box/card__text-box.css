@@ -1,9 +1,7 @@
 .card__text-box {
   display: flex;
   background-color: #ffffff;
-  height: 79px;
   align-items: center;
   justify-content: space-between;
-  padding-left: 20px;
-  padding-right: 20px;
+  padding: 25px 20px;
 }
