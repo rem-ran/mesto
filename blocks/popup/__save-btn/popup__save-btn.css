@@ -6,10 +6,9 @@
   background-color: #000000;
   border: none;
   border-radius: 2px;
-  min-width: 358px;
+  width: 100%;
   min-height: 50px;
   padding: 0;
-  margin-bottom: 37px;
   margin-top: 48px;
   transition: linear 0.3s;
   color: #ffffff;
@@ -19,9 +18,7 @@
   .popup__save-btn {
     font-size: 14px;
     line-height: 1.21;
-    min-width: 238px;
     min-height: 46px;
-    margin-bottom: 25px;
     margin-top: 45px;
   }
 }

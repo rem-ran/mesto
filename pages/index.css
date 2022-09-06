@@ -33,6 +33,6 @@
 @import url(../blocks/card/__text-box/card__text-box.css);
 @import url(../blocks/card/__heading/card__heading.css);
 @import url(../blocks/card/__like-btn/card__like-btn.css);
-@import url(../blocks/card/__like-btn_active/card__like-btn_active.css);
+@import url(../blocks/card/__like-btn/_active/card__like-btn_active.css);
 
 @import url(../blocks/footer/__note/footer__note.css);
