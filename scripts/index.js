@@ -11,27 +11,24 @@ let profileName = profile.querySelector(".profile__name");
 let profileProfession = profile.querySelector(".profile__profession");
 
 
-
 let openCloseEditPopup = () => {
-   popup.classList.toggle("popup_opened");
-   if (popup.classList.contains("popup_opened") === true) {
-   inputName.value = profileName.textContent;
-   inputProfession.value = profileProfession.textContent;
-   }
+  popup.classList.toggle("popup_opened");
+  if (popup.classList.contains("popup_opened") === true) {
+    inputName.value = profileName.textContent;
+    inputProfession.value = profileProfession.textContent;
+  }
 }
 
-openProfEditBtn.addEventListener("click", () => {
-   openCloseEditPopup();
-});
-
-closeProfEditBtn.addEventListener("click", openCloseEditPopup);
-
 function formSubmitHandler (evt) {
-   evt.preventDefault();
-   profileName.textContent = inputName.value ;
-   profileProfession.textContent = inputProfession.value ;
-   openCloseEditPopup();
+  evt.preventDefault();
+  profileName.textContent = inputName.value ;
+  profileProfession.textContent = inputProfession.value ;
+  openCloseEditPopup();
 }
 
 popupForm.addEventListener('submit', formSubmitHandler);
+
+openProfEditBtn.addEventListener("click", openCloseEditPopup);
+
+closeProfEditBtn.addEventListener("click", openCloseEditPopup);
 

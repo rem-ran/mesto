@@ -121,11 +121,16 @@
       <section class="popup">
         <div class="popup__container">
           <h2 class="popup__heading">Редактировать профиль</h2>
-          <form class="popup__form" action="" method="get">
-            <input class="popup__input popup__input_type_name" type="text" />
+          <form class="popup__form" method="get" name="user-data">
+            <input
+              class="popup__input popup__input_type_name"
+              type="text"
+              name="username"
+            />
             <input
               class="popup__input popup__input_type_profession"
               type="text"
+              name="user-job"
             />
             <!-- кнопка сохранения данных попапа -->
             <button class="popup__save-btn" type="submit">Сохранить</button>
@@ -134,7 +139,7 @@
           <button class="popup__close-btn" type="button"></button>
         </div>
       </section>
-      <script src="./scripts/index.js"></script>
     </div>
+    <script src="./scripts/index.js"></script>
   </body>
 </html>
