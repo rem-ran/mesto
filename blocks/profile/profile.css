@@ -1,4 +1,4 @@
-.profile__container {
+.profile {
   max-width: 880px;
   margin: auto;
   margin-top: 40px;
@@ -8,14 +8,14 @@
 }
 
 @media screen and (max-width: 1023px) {
-  .profile__container {
+  .profile {
     max-width: 581px;
     margin-top: 38px;
   }
 }
 
 @media screen and (max-width: 767px) {
-  .profile__container {
+  .profile {
     margin-top: 42px;
     max-width: 282px;
     flex-direction: column;
