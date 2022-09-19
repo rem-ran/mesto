@@ -47,12 +47,27 @@ function setListenersForCard(el) {
   likeBtn.addEventListener("click", () => {
     likeBtn.classList.toggle("card__like-btn_active");
   });
+
   const deleteBtn = el.querySelector(".card__delete-btn");
   deleteBtn.addEventListener("click", cardDelete);
+
+  const imagePopup = el.querySelector(".card__image");
+  imagePopup.addEventListener("click", openImagePopup);
 }
 
 function cardDelete(event) {
   event.target.closest(".card").remove();
+}
+
+//открытие попапа с картинкой по клику
+function openImagePopup(event) {
+  popupImage.classList.toggle("popup_opened");
+  const cardImage = event.target.closest('.card');
+  const currentImageText = cardImage.querySelector(".card__heading").textContent;
+  document.querySelector(".image-zoom__caption").textContent = currentImageText;
+
+  const currentImage = cardImage.querySelector(".card__image").src;
+  document.querySelector(".image-zoom__image").src = currentImage;
 }
 
 renderCardsFromInitialArray();
@@ -68,6 +83,9 @@ const inputUserProfession = popup.querySelector(".popup__input_type_profession")
 const cardPopup = document.querySelector(".popup_type_card")
 const popupCardForm = document.querySelector(".popup__form_type_card");
 const cardPopupCloseBtn = document.querySelector(".popup__close-btn_type_card");
+
+const popupImage = document.querySelector(".image-zoom");
+const popupImageClodeBtn = document.querySelector(".image-zoom__close-btn");
 
 const profile = document.querySelector(".profile");
 const profEditBtn = profile.querySelector(".profile__edit-btn");
@@ -115,6 +133,11 @@ function formSubmitCard (evt) {
   openCloseCardPopup();
 }
 
+const closeImagePopup = () => {
+  popupImage.classList.remove("popup_opened");
+}
+
+
 popupCardForm.addEventListener('submit', formSubmitCard);
 
 popupUserForm.addEventListener('submit', formSubmitHandler);
@@ -126,3 +149,5 @@ profCloseBtn.addEventListener("click", openCloseUserPopup);
 cardAddBtn.addEventListener("click", openCloseCardPopup);
 
 cardPopupCloseBtn.addEventListener("click", openCloseCardPopup);
+
+popupImageClodeBtn.addEventListener("click", closeImagePopup);
