@@ -39,74 +39,7 @@
         </section>
         <!-- секция с карточками-картинками и лайком -->
         <section class="cards">
-          <ul class="cards__container">
-            <li class="card">
-              <img
-                class="card__image"
-                src="./images/card-karachaevsk.png"
-                alt="Старинный, каменный, трёхэтажный, полуразрушенный дом на фоне зелёной горной местности "
-              />
-              <div class="card__text-box">
-                <h2 class="card__heading">Карачаево-Черкесия</h2>
-                <button class="card__like-btn" type="button"></button>
-              </div>
-            </li>
-            <li class="card">
-              <img
-                class="card__image"
-                src="./images/card-baikal.png"
-                alt="Вид на скалистый берег замёрсшего озера"
-              />
-              <div class="card__text-box">
-                <h2 class="card__heading">Байкал</h2>
-                <button class="card__like-btn" type="button"></button>
-              </div>
-            </li>
-            <li class="card">
-              <img
-                class="card__image"
-                src="./images/card-dombai.png"
-                alt="заснеженная гора на фоне серого неба на заднем плане и пожелтевший лес на золмах на переднем"
-              />
-              <div class="card__text-box">
-                <h2 class="card__heading">Домбай</h2>
-                <button class="card__like-btn" type="button"></button>
-              </div>
-            </li>
-            <li class="card">
-              <img
-                class="card__image"
-                src="./images/card-kamchatka.png"
-                alt="вулканистый желтый берег синего моря и заснеженные сопки на заднем плане"
-              />
-              <div class="card__text-box">
-                <h2 class="card__heading">Камчатка</h2>
-                <button class="card__like-btn" type="button"></button>
-              </div>
-            </li>
-            <li class="card">
-              <img
-                class="card__image"
-                src="./images/card-elbrus.png"
-                alt="Пустынная местность на закате и темная гора где-то далеко на заднем плане"
-              />
-              <div class="card__text-box">
-                <h2 class="card__heading">Эльбрус</h2>
-                <button class="card__like-btn" type="button"></button>
-              </div>
-            </li>
-            <li class="card">
-              <img
-                class="card__image"
-                src="./images/card-reka-kucherla.png"
-                alt="Колея от машины в траве вдоль зелёного ушелья, ведущего к заснеженным горам "
-              />
-              <div class="card__text-box">
-                <h2 class="card__heading">Алтай</h2>
-                <button class="card__like-btn" type="button"></button>
-              </div>
-            </li>
-          </ul>
+          <ul class="cards__container"></ul>
         </section>
       </main>
       <!-- подвал -->
@@ -114,12 +47,18 @@
         <p class="footer__note">&copy; 2020 Mesto Russia</p>
       </footer>
       <!-- секция с попапом -->
-      <section class="popup">
-        <div class="popup__container">
-          <h2 class="popup__heading">Редактировать профиль</h2>
-          <form class="popup__form" method="get" name="user-data">
+      <section class="popup popup_type_user">
+        <div class="popup__container popup__container_type_user">
+          <h2 class="popup__heading popup__heading_type_user">
+            Редактировать профиль
+          </h2>
+          <form
+            class="popup__form popup__form_type_user"
+            method="get"
+            name="user-data"
+          >
             <input
-              class="popup__input popup__input_type_name"
+              class="popup__input popup__input_type_username"
               type="text"
               name="username"
             />
@@ -129,12 +68,75 @@
               name="user-job"
             />
             <!-- кнопка сохранения данных попапа -->
-            <button class="popup__save-btn" type="submit">Сохранить</button>
+            <button
+              class="popup__save-btn popup__save-btn_type_user"
+              type="submit"
+            >
+              Сохранить
+            </button>
           </form>
           <!-- кнопка закрытия попапа без созранения данных -->
-          <button class="popup__close-btn" type="button"></button>
+          <button
+            class="popup__close-btn popup__close-btn_type_user"
+            type="button"
+          ></button>
         </div>
       </section>
+      <section class="popup popup_type_card">
+        <div class="popup__container popup__container_type_card">
+          <h2 class="popup__heading popup__heading_type_card">Новое место</h2>
+          <form
+            class="popup__form popup__form_type_card"
+            method="get"
+            name="card-data"
+          >
+            <input
+              class="popup__input popup__input_type_card-name"
+              type="text"
+              name="card-name"
+              placeholder="Название"
+            />
+            <input
+              class="popup__input popup__input_type_card-link"
+              type="text"
+              name="img-link"
+              placeholder="Ссылка на картинку"
+            />
+            <!-- кнопка создания новой карточки -->
+            <button
+              class="popup__save-btn popup__save-btn_type_card"
+              type="submit"
+            >
+              Создать
+            </button>
+          </form>
+          <!-- кнопка закрытия попапа -->
+          <button
+            class="popup__close-btn popup__close-btn_type_card"
+            type="button"
+          ></button>
+        </div>
+      </section>
+      <section class="popup image-zoom">
+        <figure class="image-zoom__container">
+          <img class="image-zoom__image" src="#" alt="#" />
+          <button
+            class="popup__close-btn image-zoom__close-btn"
+            type="button"
+          ></button>
+          <figcaption class="image-zoom__caption"></figcaption>
+        </figure>
+      </section>
+      <template class="card-template">
+        <li class="card">
+          <img class="card__image" src="#" alt="#" />
+          <button class="card__delete-btn" type="button"></button>
+          <div class="card__text-box">
+            <h2 class="card__heading"></h2>
+            <button class="card__like-btn" type="button"></button>
+          </div>
+        </li>
+      </template>
     </div>
     <script src="./scripts/index.js"></script>
   </body>
