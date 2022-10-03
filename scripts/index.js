@@ -92,12 +92,14 @@ function deleteCard(event) {
 
 function openPopup(popup) {
   popup.classList.add('popup_opened');
-  document.addEventListener("keydown", closePopupByEsc);
+  document.addEventListener('keydown', closePopupByEsc);
+  popup.addEventListener('click', closePopupByDarkArea);
 }
 
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
   document.removeEventListener("keydown", closePopupByEsc);
+  popup.removeEventListener('click', closePopupByDarkArea);
 }
 
 //закрытие всех попапов по крестику
@@ -107,14 +109,21 @@ closeButtons.forEach((button) => {
   button.removeEventListener('click', () => closePopup(popup));
 });
 
-function closePopupByEsc(evt) {
-  if (evt.key = "Escape") {
-    const popupOpened = document.querySelector(".popup_opened");
-    closePopup(popupOpened);
+function findOpenedPopup() {
+  return document.querySelector(".popup_opened");
+} 
+
+function closePopupByDarkArea (event) {
+  if (event.target.classList.contains(".popup")|| event.target.classList.contains('popup_opened')) {
+    closePopup(findOpenedPopup());
   }
 }
 
-
+function closePopupByEsc(event) {
+  if (event.key = "Escape") {
+    closePopup(findOpenedPopup());
+  }
+}
 
 //открытие попапа с картинкой по клику
 function openImagePopup(event) {
