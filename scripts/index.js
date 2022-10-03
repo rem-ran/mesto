@@ -92,17 +92,29 @@ function deleteCard(event) {
 
 function openPopup(popup) {
   popup.classList.add('popup_opened');
+  document.addEventListener("keydown", closePopupByEsc);
 }
 
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
+  document.removeEventListener("keydown", closePopupByEsc);
 }
 
 //закрытие всех попапов по крестику
 closeButtons.forEach((button) => {
   const popup = button.closest('.popup');
   button.addEventListener('click', () => closePopup(popup));
+  button.removeEventListener('click', () => closePopup(popup));
 });
+
+function closePopupByEsc(evt) {
+  if (evt.key = "Escape") {
+    const popupOpened = document.querySelector(".popup_opened");
+    closePopup(popupOpened);
+  }
+}
+
+
 
 //открытие попапа с картинкой по клику
 function openImagePopup(event) {
@@ -121,10 +133,8 @@ renderCardsFromInitialArray();
 
 const openUserPopup = () => {
   openPopup(userPopup);
-  if (userPopup.classList.contains("popup_opened") === true) {
     inputUserName.value = profileName.textContent;
     inputUserProfession.value = profileProfession.textContent;
-  }
 }
 
 function handleProfileFormSubmit (evt) {
