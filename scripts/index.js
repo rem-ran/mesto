@@ -31,8 +31,6 @@ const popupSaveBtn = userPopup.querySelector(".popup__save-btn_type_user");
 const inputUserName = userPopup.querySelector(".popup__input_type_username");
 const inputUserProfession = userPopup.querySelector(".popup__input_type_profession");
 
-const closeButtons = document.querySelectorAll('.popup__close-btn');
-
 const cardPopup = document.querySelector(".popup_type_card")
 const popupCardForm = document.querySelector(".popup__form_type_card");
 
@@ -54,7 +52,7 @@ const cardTemplate = document.querySelector(".card-template").content;
 
 
 function renderCardsFromInitialArray() {
-  initialCards.forEach(renderCard);
+  initialCards.reverse().forEach(renderCard);
 }
 
 
@@ -71,7 +69,7 @@ function createCard(item) {
 
 function renderCard(el) {
   const newCard = createCard(el)
-  cardSection.appendChild(newCard);
+  cardSection.prepend(newCard);
 }
 
 
@@ -98,38 +96,15 @@ function deleteCard(event) {
 function openPopup(popup) {
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', closePopupByEsc);
-  popup.addEventListener('click', closePopupByDarkArea);
-
-  if (popup.classList.contains("popup_type_user")) {
-    inputUserName.value = profileName.textContent;
-    inputUserProfession.value = profileProfession.textContent;  
-  }
-
-  if (popup.classList.contains("popup_type_card")) {
-    inputCardName.value = "";
-    inputCardLink.value = "";
-  }
-
-  //для попапов с формой запускаем валидацию из файла validate.js
-  if (popup.classList.contains("form")) {
-    enableValidation (validationConfig);
-  }
+  popup.addEventListener('click', closePopupByDarkAreaAndCrossClick);
 }
 
 
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
   document.removeEventListener("keydown", closePopupByEsc);
-  popup.removeEventListener('click', closePopupByDarkArea);
+  popup.removeEventListener('click', closePopupByDarkAreaAndCrossClick);
 }
-
-
-//закрытие всех попапов по крестику
-closeButtons.forEach((button) => {
-  const popup = button.closest('.popup');
-  button.addEventListener('click', () => closePopup(popup));
-  button.removeEventListener('click', () => closePopup(popup));
-});
 
 
 function findOpenedPopup() {
@@ -137,9 +112,9 @@ function findOpenedPopup() {
 } 
 
 
-function closePopupByDarkArea (evt) {
-  if (evt.target.classList.contains(".popup")|| evt.target.classList.contains('popup_opened')) {
-    closePopup(findOpenedPopup());
+function closePopupByDarkAreaAndCrossClick (evt) {
+  if ((evt.target.classList.contains('popup_opened')) || (evt.target.classList.contains('popup__close-btn'))) {
+    closePopup(evt.currentTarget);
   }
 }
 
@@ -176,18 +151,13 @@ function handleProfileFormSubmit (evt) {
 }
 
 
-// создание карточки с 2 аргументами
-function addCard(cardName, cardLink) {
-  const item = { name: cardName, link: cardLink };
-  const newCard = createCard(item);
-  cardSection.prepend(newCard);
-}
-
-
 function handleCardFormSubmit (evt) {
   evt.preventDefault();
-  addCard(inputCardName.value, inputCardLink.value);
-  evt.target.reset()
+  const item = { 
+    name: inputCardName.value, 
+    link: inputCardLink.value 
+  }
+  renderCard(item)
   closePopup(cardPopup);
 }
 
@@ -196,6 +166,15 @@ popupCardForm.addEventListener('submit', handleCardFormSubmit);
 
 popupUserForm.addEventListener('submit', handleProfileFormSubmit);
 
-profEditBtn.addEventListener("click", () => openPopup(userPopup));
+profEditBtn.addEventListener("click", () => {
+  openPopup(userPopup)
+  inputUserName.value = profileName.textContent;
+  inputUserProfession.value = profileProfession.textContent;
+  resetError(userPopup, validationConfig);
+});
 
-cardAddBtn.addEventListener("click", () => openPopup(cardPopup));
+cardAddBtn.addEventListener("click", () => {
+  openPopup(cardPopup)
+  popupCardForm.reset();
+  resetError(cardPopup, validationConfig);
+});
