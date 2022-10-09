@@ -51,16 +51,11 @@ const setEventListeners = (formElement, {inputSelector, submitButtonSelector, in
     inputElement.addEventListener('input', () => {
       toggleInputErrorState(formElement, inputElement);
       
-      if (hasInvalidInput(inputList)) {
-        activateBtn(inputList, buttonElement, inactiveButtonClass);
-      } else {
-        deactivateBtn(inputList, buttonElement, inactiveButtonClass);
-      }
-
-      // toggleButtonState(inputList, buttonElement, inactiveButtonClass);      
+      toggleBtnState(inputList, buttonElement, inactiveButtonClass);      
     });
   });
 };
+
 
 //запускаем валидацию
 const enableValidation = ({ formSelector, ...rest }) => {
@@ -80,19 +75,24 @@ const hasInvalidInput = (inputList => {
 
 
 
-//активация кнопки отправки
-const activateBtn  = (inputList, buttonElement, inactiveButtonClass) => {
-  if (hasInvalidInput(inputList)) {
-    buttonElement.classList.add(inactiveButtonClass);
-    buttonElement.setAttribute("disabled", true);
-  }
+// активация кнопки отправки
+const activateBtn  = (buttonElement, inactiveButtonClass) => {
+  buttonElement.classList.add(inactiveButtonClass);
+  buttonElement.setAttribute("disabled", true);
 }
 
 //деактивация кнопки отправки
-const deactivateBtn  = (inputList, buttonElement, inactiveButtonClass) => {
-  if (!(hasInvalidInput(inputList))) {
-    buttonElement.classList.remove(inactiveButtonClass);
-    buttonElement.removeAttribute("disabled");
+const deactivateBtn  = (buttonElement, inactiveButtonClass) => {
+  buttonElement.classList.remove(inactiveButtonClass);
+  buttonElement.removeAttribute("disabled");
+}
+
+//смена состояния кнопки отправки
+const toggleBtnState = (inputList, buttonElement, inactiveButtonClass) => {
+  if (hasInvalidInput(inputList)) {
+    activateBtn(buttonElement, inactiveButtonClass);
+  } else {
+    deactivateBtn(buttonElement, inactiveButtonClass);
   }
 }
 
@@ -105,12 +105,8 @@ function resetError(formElement, object) {
   inputList.forEach((inputElement) => {
     hideInputError(formElement, inputElement, object);
 
-    if (hasInvalidInput(inputList)) {
-      activateBtn(inputList, buttonElement, object.inactiveButtonClass);
-    } else {
-      deactivateBtn(inputList, buttonElement, object.inactiveButtonClass);
-    }
-  })
+    toggleBtnState(inputList, buttonElement, object.inactiveButtonClass);
+  });
 };
 
 enableValidation (validationConfig);
