@@ -30,7 +30,7 @@ const hideInputError = (formElement, inputElement, {inputErrorClass, errorClass}
 
 
 // проверка на валидацию поля инпута
-const isValid = (formElement, inputElement) => {
+const toggleInputErrorState = (formElement, inputElement) => {
   
   if (!inputElement.validity.valid) {
     showInputError(formElement, inputElement, inputElement.validationMessage, validationConfig);
@@ -49,9 +49,15 @@ const setEventListeners = (formElement, {inputSelector, submitButtonSelector, in
 
   inputList.forEach((inputElement) => {    
     inputElement.addEventListener('input', () => {
-      isValid(formElement, inputElement);
+      toggleInputErrorState(formElement, inputElement);
       
-      toggleButtonState(inputList, buttonElement, inactiveButtonClass);      
+      if (hasInvalidInput(inputList)) {
+        activateBtn(inputList, buttonElement, inactiveButtonClass);
+      } else {
+        deactivateBtn(inputList, buttonElement, inactiveButtonClass);
+      }
+
+      // toggleButtonState(inputList, buttonElement, inactiveButtonClass);      
     });
   });
 };
@@ -61,7 +67,6 @@ const enableValidation = ({ formSelector, ...rest }) => {
   const formList = Array.from(document.querySelectorAll(formSelector));
   
   formList.forEach((formElement) => {
-  resetError(formElement, rest);
   setEventListeners(formElement, rest);
   });
 };
@@ -73,25 +78,39 @@ const hasInvalidInput = (inputList => {
   });
 });
 
-//смена состояния кнопки отправки
-const toggleButtonState = (inputList, buttonElement, inactiveButtonClass) => {
+
+
+//активация кнопки отправки
+const activateBtn  = (inputList, buttonElement, inactiveButtonClass) => {
   if (hasInvalidInput(inputList)) {
     buttonElement.classList.add(inactiveButtonClass);
     buttonElement.setAttribute("disabled", true);
+  }
+}
 
-  } else {
+//деактивация кнопки отправки
+const deactivateBtn  = (inputList, buttonElement, inactiveButtonClass) => {
+  if (!(hasInvalidInput(inputList))) {
     buttonElement.classList.remove(inactiveButtonClass);
     buttonElement.removeAttribute("disabled");
   }
-}; 
+}
+
 
 //сброс текста ошибок и состояния кнопки отправки
-function resetError(formElement, {inputSelector, submitButtonSelector, inactiveButtonClass}) {
-  const inputList = Array.from(formElement.querySelectorAll(inputSelector));
-  const buttonElement = formElement.querySelector(submitButtonSelector);
+function resetError(formElement, object) {
+  const inputList = Array.from(formElement.querySelectorAll(object.inputSelector));
+  const buttonElement = formElement.querySelector(object.submitButtonSelector);
 
   inputList.forEach((inputElement) => {
-  hideInputError(formElement, inputElement, validationConfig);
-  toggleButtonState(inputList, buttonElement, inactiveButtonClass);
+    hideInputError(formElement, inputElement, object);
+
+    if (hasInvalidInput(inputList)) {
+      activateBtn(inputList, buttonElement, object.inactiveButtonClass);
+    } else {
+      deactivateBtn(inputList, buttonElement, object.inactiveButtonClass);
+    }
   })
 };
+
+enableValidation (validationConfig);
