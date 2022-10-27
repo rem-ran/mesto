@@ -1,98 +1,22 @@
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
+//метод отрисовки карточки в разметке
+function renderCard(item) {
+  const card = new Card(item, '.card-template', openImagePopup);
+  const cardElement = card.createCard();
+  cardSection.prepend(cardElement);
+}
 
-const userPopup = document.querySelector(".popup_type_user")
-const popupUserForm = userPopup.querySelector(".popup__form_type_user");
-const popupSaveBtn = userPopup.querySelector(".popup__save-btn_type_user");
-const inputUserName = userPopup.querySelector(".popup__input_type_username");
-const inputUserProfession = userPopup.querySelector(".popup__input_type_profession");
-
-const cardPopup = document.querySelector(".popup_type_card")
-const popupCardForm = document.querySelector(".popup__form_type_card");
-
-const imagePopup = document.querySelector(".image-zoom");
-const zoomedCaption = document.querySelector(".image-zoom__caption");
-const zoomedImage = document.querySelector(".image-zoom__image");
-
-const profile = document.querySelector(".profile");
-const profEditBtn = profile.querySelector(".profile__edit-btn");
-const profileName = profile.querySelector(".profile__name");
-const profileProfession = profile.querySelector(".profile__profession");
-const cardAddBtn = profile.querySelector(".profile__add-btn");
-
-const inputCardName = document.querySelector(".popup__input_type_card-name");
-const inputCardLink = document.querySelector(".popup__input_type_card-link");
-
-const cardSection = document.querySelector(".cards__container");
-const cardTemplate = document.querySelector(".card-template").content;
-
-
+//метод создания начальных карточек из массива "initialCards"
 function renderCardsFromInitialArray() {
   initialCards.reverse().forEach(renderCard);
 }
 
-
-function createCard(item) {
-  const cardElement = cardTemplate.cloneNode(true);
-  cardElement.querySelector('.card__heading').textContent = item.name;
-  const cardImage = cardElement.querySelector('.card__image');
-  cardImage.src = item.link;
-  cardImage.alt = item.name;
-  setListenersForCard(cardElement);
-  return cardElement;
-}
+//выводим начальный массив карточек на экран при загрузке страницы
+renderCardsFromInitialArray();
 
 
-function renderCard(el) {
-  const newCard = createCard(el)
-  cardSection.prepend(newCard);
-}
 
 
-//кнопки на каждой карточке
-function setListenersForCard(el) {
-  const likeBtn = el.querySelector(".card__like-btn");
-  likeBtn.addEventListener("click", () => {
-    likeBtn.classList.toggle("card__like-btn_active");
-  });
-
-  const deleteBtn = el.querySelector(".card__delete-btn");
-  deleteBtn.addEventListener("click", deleteCard);
-
-  const imagePopup = el.querySelector(".card__image");
-  imagePopup.addEventListener("click", openImagePopup);
-}
-
-
-function deleteCard(event) {
-  event.target.closest(".card").remove();
-}
-
-
+//открываем попап и вешаем на него слушатели закрытия: по крестику, темной зоне и кнопки Esc
 function openPopup(popup) {
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', closePopupByEsc);
@@ -100,6 +24,7 @@ function openPopup(popup) {
 }
 
 
+//закрываем попап и снимаем с него слушатели закрытия: по кнопке-крестику, тёмной зоне и кнопке Esc
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
   document.removeEventListener("keydown", closePopupByEsc);
@@ -107,11 +32,13 @@ function closePopup(popup) {
 }
 
 
+//находим открытый попап
 function findOpenedPopup() {
   return document.querySelector(".popup_opened");
 } 
 
 
+//метод закрытия попапа по клику на тёмную зону и кнопку-крестик
 function closePopupByDarkAreaAndCrossClick (evt) {
   if ((evt.target.classList.contains('popup_opened')) || (evt.target.classList.contains('popup__close-btn'))) {
     closePopup(evt.currentTarget);
@@ -119,6 +46,7 @@ function closePopupByDarkAreaAndCrossClick (evt) {
 }
 
 
+//метод закрытия попапа по нажатаю на кнопку Esc
 function closePopupByEsc(evt) {
   if (evt.key === "Escape") {
     closePopup(findOpenedPopup());
@@ -126,7 +54,7 @@ function closePopupByEsc(evt) {
 }
 
 
-//открытие попапа с картинкой по клику
+//метод открытия попапа с увеличенной картинкой по клику на картинку карточки
 function openImagePopup(event) {
   openPopup(imagePopup);
   const cardImage = event.target.closest('.card');
@@ -140,9 +68,10 @@ function openImagePopup(event) {
 }
 
 
-renderCardsFromInitialArray();
 
 
+//метод редактирования информации пользователя с введёнными пользователем данными 
+//и закрытием попапа редактированния данных пользователя
 function handleProfileFormSubmit (evt) {
   evt.preventDefault();
   profileName.textContent = inputUserName.value ;
@@ -151,6 +80,8 @@ function handleProfileFormSubmit (evt) {
 }
 
 
+//метод добавления новой карточки в разметку с введёнными пользователем данными 
+//и закрытием попапа создания карточки
 function handleCardFormSubmit (evt) {
   evt.preventDefault();
   const item = { 
@@ -162,9 +93,15 @@ function handleCardFormSubmit (evt) {
 }
 
 
+
+
+//вешаем слушатель на сабмит формы создания новой карточки
 popupCardForm.addEventListener('submit', handleCardFormSubmit);
 
+
+//вешаем слушатель на сабмит формы редактированния данных пользователя
 popupUserForm.addEventListener('submit', handleProfileFormSubmit);
+
 
 profEditBtn.addEventListener("click", () => {
   openPopup(userPopup)
@@ -172,6 +109,7 @@ profEditBtn.addEventListener("click", () => {
   inputUserProfession.value = profileProfession.textContent;
   resetError(userPopup, validationConfig);
 });
+
 
 cardAddBtn.addEventListener("click", () => {
   openPopup(cardPopup)
