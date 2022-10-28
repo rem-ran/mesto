@@ -1,3 +1,13 @@
+//вызываем валидацию формы создания новой карточки
+const cardFormValidator = new FormValidator(validationConfig, cardPopup);
+cardFormValidator.enableValidation();
+
+//вызываем валидвцию формы редактирования данных пользователя
+const userFormValidator = new FormValidator(validationConfig, userPopup);
+userFormValidator.enableValidation();
+
+
+
 //метод отрисовки карточки в разметке
 function renderCard(item) {
   const card = new Card(item, '.card-template', openImagePopup);
@@ -84,10 +94,12 @@ function handleProfileFormSubmit (evt) {
 //и закрытием попапа создания карточки
 function handleCardFormSubmit (evt) {
   evt.preventDefault();
+
   const item = { 
     name: inputCardName.value, 
     link: inputCardLink.value 
   }
+
   renderCard(item)
   closePopup(cardPopup);
 }
@@ -103,16 +115,24 @@ popupCardForm.addEventListener('submit', handleCardFormSubmit);
 popupUserForm.addEventListener('submit', handleProfileFormSubmit);
 
 
+
 profEditBtn.addEventListener("click", () => {
+
   openPopup(userPopup)
+
   inputUserName.value = profileName.textContent;
   inputUserProfession.value = profileProfession.textContent;
-  resetError(userPopup, validationConfig);
+
+  userFormValidator.resetError();
 });
 
 
+
 cardAddBtn.addEventListener("click", () => {
+
   openPopup(cardPopup)
+
   popupCardForm.reset();
-  resetError(cardPopup, validationConfig);
+
+  cardFormValidator.resetError();
 });

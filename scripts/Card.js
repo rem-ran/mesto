@@ -1,7 +1,6 @@
 //класс карточки с картинкой 
 class Card {
 
-
   constructor(data, templateSelector, zoomImgFunc) {
     this._name = data.name;
     this._link = data.link;
