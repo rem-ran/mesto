@@ -1,11 +1,11 @@
 //класс карточки с картинкой 
-class Card {
+export default class Card {
 
-  constructor(data, templateSelector, zoomImgFunc) {
+  constructor(data, templateSelector, openImagePopup) {
     this._name = data.name;
     this._link = data.link;
     this._templateSelector = templateSelector;
-    this._zoomImgFunc = zoomImgFunc;
+    this._openImagePopup = openImagePopup;
   }
 
 
@@ -14,49 +14,65 @@ class Card {
     const cardElement = document
     .querySelector(this._templateSelector)
     .content
+    .querySelector(".card")
     .cloneNode(true);
     
     return cardElement;
   }
-
+  
 
   //метод создания новой карточки без добавления её в разметку
   createCard() {
     this._element = this._getTemplate();
-    this._setListenersForCard();
 
     const cardName = this._element.querySelector('.card__heading');
     cardName.textContent = this._name;
 
-    const cardImage = this._element.querySelector('.card__image');
-    cardImage.src = this._link;
-    cardImage.alt = this._name;
+    this._cardImage = this._element.querySelector('.card__image');
+    this._cardImage.src = this._link;
+    this._cardImage.alt = this._name;
+
+
+    this._likeBtn = this._element.querySelector(".card__like-btn");
+
+    this._deleteBtn = this._element.querySelector(".card__delete-btn");
+
+    this._setListenersForCard();
 
     return this._element;
   }
 
 
+  //метод постановки и снятия лайка
+  _handleCardeLike() {
+    this._likeBtn.classList.toggle("card__like-btn_active");
+  }
+
+  //метод удаления карточки
+  _handleCardDelete() {
+    this._element.remove();
+  }
+
+
+
   //вешаем слушатели на карточку
   _setListenersForCard() {
 
-
     //слушатель лайка карточки
-    const likeBtn = this._element.querySelector(".card__like-btn");
-    likeBtn.addEventListener("click", () => {
-      likeBtn.classList.toggle("card__like-btn_active");
+    this._likeBtn.addEventListener("click", () => {
+      this._handleCardeLike();
     });
-  
 
     //слушатель удаления карточки
-    const deleteBtn = this._element.querySelector(".card__delete-btn");
-    deleteBtn.addEventListener("click", (event) => {
-        event.target.closest(".card").remove();
+    this._deleteBtn.addEventListener("click", () => {
+      this._handleCardDelete();
     });
 
-
     //слушатель открытия попапа с увеличенной картинкой карточки
-    const imagePopup = this._element.querySelector(".card__image");
-    imagePopup.addEventListener("click", this._zoomImgFunc);
+    this._cardImage.addEventListener("click", () => {
+      this._openImagePopup(this._name, this._link)
+    });
+  
   }
 
 }
