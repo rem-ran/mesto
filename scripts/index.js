@@ -1,9 +1,69 @@
+//импортируем константы
+import {
+  //массив с начальными карточками при загрузке страницы
+  initialCards,
+
+  //константы попапа с данными пользователя
+  userPopup,
+  popupUserForm,
+  popupUserSaveButton,
+  inputUserName,
+  inputUserProfession,
+
+  //константы попапа с добавлением новой карточки
+  cardPopup,
+  popupCardForm,
+  inputCardName,
+  inputCardLink,
+  popupCardSaveButton,
+
+  //константы попапа увеличенной картинки
+  imagePopup,
+  zoomedCaption,
+  zoomedImage,
+
+  //константы профиля пользователя
+  profEditBtn,
+  profileName,
+  profileProfession,
+  cardAddBtn,
+
+  //константы карточек
+  cardSection,
+
+  //объект с нужными для валидации классами
+  validationConfig,
+
+  inputUserList,
+  inputCardList
+
+} from "./constants.js";
+
+//импортируем класс карточки
+import Card from "./Card.js";
+
+//импортируем класс валидации формы
+import FormValidator from "./FormValidator.js";
+
+
+
 //вызываем валидацию формы создания новой карточки
-const cardFormValidator = new FormValidator(validationConfig, cardPopup);
+const cardFormValidator = new FormValidator(
+  validationConfig, 
+  cardPopup, 
+  popupCardSaveButton, 
+  inputCardList
+);
 cardFormValidator.enableValidation();
 
+
 //вызываем валидвцию формы редактирования данных пользователя
-const userFormValidator = new FormValidator(validationConfig, userPopup);
+const userFormValidator = new FormValidator(
+  validationConfig, 
+  userPopup, 
+  popupUserSaveButton, 
+  inputUserList
+);
 userFormValidator.enableValidation();
 
 
@@ -65,16 +125,14 @@ function closePopupByEsc(evt) {
 
 
 //метод открытия попапа с увеличенной картинкой по клику на картинку карточки
-function openImagePopup(event) {
+function openImagePopup(name, imageLink) {
   openPopup(imagePopup);
-  const cardImage = event.target.closest('.card');
-  const currentImageText = cardImage.querySelector(".card__heading").textContent;
-  zoomedCaption.textContent = currentImageText;
 
-  const cardImageSrc = cardImage.querySelector(".card__image").src;
+  zoomedCaption.textContent = name;
+  
   const currentZoomedImage = zoomedImage;
-  currentZoomedImage.src = cardImageSrc;
-  currentZoomedImage.alt = currentImageText;
+  currentZoomedImage.src = imageLink;
+  currentZoomedImage.alt = name;
 }
 
 
@@ -123,7 +181,7 @@ profEditBtn.addEventListener("click", () => {
   inputUserName.value = profileName.textContent;
   inputUserProfession.value = profileProfession.textContent;
 
-  userFormValidator.resetError();
+  userFormValidator.resetErrors();
 });
 
 
@@ -134,5 +192,5 @@ cardAddBtn.addEventListener("click", () => {
 
   popupCardForm.reset();
 
-  cardFormValidator.resetError();
+  cardFormValidator.resetErrors();
 });
