@@ -1,42 +1,46 @@
 //класс валидации формы
 export default class FormValidator {
   
-  constructor(validationObject, validationElement, popupSaveButton, inputList) {
+  constructor(validationObject, validationElement) {
     this._validationObject = validationObject;
     this._validationElement = validationElement;
-    this._popupSaveButton = popupSaveButton;
-    this._inputList = inputList;
 
+    this._popupSaveButton = this._validationElement
+    .querySelector(this._validationObject.submitButtonSelector);
+
+    this._inputList = Array.from(this._validationElement
+      .querySelectorAll(this._validationObject.inputSelector));
   }
 
 
- //метод отображения ошибок ввода
- _showInputError = (inputElement, errorMessage) => {
-  const {inputErrorClass, errorClass} = this._validationObject;
-  inputElement.classList.add(inputErrorClass);
-  
-  const errorElement = this._validationElement.querySelector(`.${inputElement.id}-error`);
-  errorElement.textContent = errorMessage;
-  errorElement.classList.add(errorClass);
-};
+
+  //метод отображения ошибок ввода
+  _showInputError = (inputElement, errorMessage) => {
+    const {inputErrorClass, errorClass} = this._validationObject;
+    inputElement.classList.add(inputErrorClass);
+    
+    const errorElement = this._validationElement.querySelector(`.${inputElement.id}-error`);
+    errorElement.textContent = errorMessage;
+    errorElement.classList.add(errorClass);
+  };
 
 
-//метод скрытия ошибкок ввода
-_hideInputError = (inputElement) => {
-  const {inputErrorClass, errorClass} = this._validationObject;
-  inputElement.classList.remove(inputErrorClass);
-  
-  const errorElement = this._validationElement.querySelector(`.${inputElement.id}-error`);
-  errorElement.classList.remove(errorClass);
-  errorElement.textContent = '';
-};
+  //метод скрытия ошибкок ввода
+  _hideInputError = (inputElement) => {
+    const {inputErrorClass, errorClass} = this._validationObject;
+    inputElement.classList.remove(inputErrorClass);
+    
+    const errorElement = this._validationElement.querySelector(`.${inputElement.id}-error`);
+    errorElement.classList.remove(errorClass);
+    errorElement.textContent = '';
+  };
 
 
   //метод проверки поля ввода и скрытия\отображения ошибок ввода
   _toggleInputErrorState = (inputElement) => {
 
-      if (!inputElement.validity.valid) {
-        this._showInputError(inputElement, inputElement.validationMessage);
+    if (!inputElement.validity.valid) {
+      this._showInputError(inputElement, inputElement.validationMessage);
         
       } else {
         this._hideInputError(inputElement);
@@ -45,19 +49,19 @@ _hideInputError = (inputElement) => {
   };
   
 
-    //ставим слушатели типа "инпут"
-    _setEventListeners = () => {
+  //ставим слушатели типа "инпут"
+  _setEventListeners = () => {
 
-      this._inputList.forEach((inputElement) => {    
-        inputElement.addEventListener('input', () => {
+    this._inputList.forEach((inputElement) => {    
+      inputElement.addEventListener('input', () => {
 
-          this._toggleInputErrorState(inputElement);
+        this._toggleInputErrorState(inputElement);
           
-          this._toggleBtnState();      
-        });
+        this._toggleBtnState();      
       });
+    });
 
-    };
+  };
 
   
     

@@ -32,10 +32,7 @@ import {
   cardSection,
 
   //объект с нужными для валидации классами
-  validationConfig,
-
-  inputUserList,
-  inputCardList
+  validationConfig
 
 } from "./constants.js";
 
@@ -50,9 +47,7 @@ import FormValidator from "./FormValidator.js";
 //вызываем валидацию формы создания новой карточки
 const cardFormValidator = new FormValidator(
   validationConfig, 
-  cardPopup, 
-  popupCardSaveButton, 
-  inputCardList
+  cardPopup
 );
 cardFormValidator.enableValidation();
 
@@ -60,9 +55,7 @@ cardFormValidator.enableValidation();
 //вызываем валидвцию формы редактирования данных пользователя
 const userFormValidator = new FormValidator(
   validationConfig, 
-  userPopup, 
-  popupUserSaveButton, 
-  inputUserList
+  userPopup
 );
 userFormValidator.enableValidation();
 
