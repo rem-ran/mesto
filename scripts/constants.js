@@ -71,8 +71,3 @@ export const validationConfig = {
   inputErrorClass: 'popup__input_type_error',
   errorClass: 'popup__error_visible',
 };
-
-export const inputUserList = Array.from(userPopup.querySelectorAll('.popup__input'));
-
-export const inputCardList = Array.from(cardPopup.querySelectorAll('.popup__input'));
-
