@@ -1,6 +1,6 @@
 ![Alt-текст](/images/screenshot-for-readme.png)
 
-# Проектная работа №8
+# Проектная работа №7
 
 ---
 
