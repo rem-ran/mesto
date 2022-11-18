@@ -42,6 +42,8 @@ import Card from "./Card.js";
 //импортируем класс валидации формы
 import FormValidator from "./FormValidator.js";
 
+import Section from "./Section.js";
+
 
 
 //вызываем валидацию формы создания новой карточки
@@ -60,21 +62,36 @@ const userFormValidator = new FormValidator(
 userFormValidator.enableValidation();
 
 
-
 //метод отрисовки карточки в разметке
-function renderCard(item) {
-  const card = new Card(item, '.card-template', openImagePopup);
-  const cardElement = card.createCard();
-  cardSection.prepend(cardElement);
-}
+const cardList = new Section ({
+  items: initialCards,
+  renderer: (item) => {
+    const card = new Card(item, '.card-template', openImagePopup);
+    const cardElement = card.createCard();
+    cardList.addItem(cardElement);
+  }
+}, ".cards__container");
 
-//метод создания начальных карточек из массива "initialCards"
-function renderCardsFromInitialArray() {
-  initialCards.reverse().forEach(renderCard);
-}
 
 //выводим начальный массив карточек на экран при загрузке страницы
-renderCardsFromInitialArray();
+cardList.renderItems();
+
+
+
+//метод отрисовки карточки в разметке
+// function renderCard(item) {
+//   const card = new Card(item, '.card-template', openImagePopup);
+//   const cardElement = card.createCard();
+//   cardSection.prepend(cardElement);
+// }
+
+//метод создания начальных карточек из массива "initialCards"
+// function renderCardsFromInitialArray() {
+//   initialCards.reverse().forEach(renderCard);
+// }
+
+//выводим начальный массив карточек на экран при загрузке страницы
+// renderCardsFromInitialArray();
 
 
 
@@ -151,7 +168,7 @@ function handleCardFormSubmit (evt) {
     link: inputCardLink.value 
   }
 
-  renderCard(item)
+  cardList.addItem();
   closePopup(cardPopup);
 }
 
