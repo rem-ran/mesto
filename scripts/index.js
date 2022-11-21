@@ -5,31 +5,15 @@ import {
 
   //константы попапа с данными пользователя
   userPopup,
-  popupUserForm,
-  popupUserSaveButton,
   inputUserName,
   inputUserProfession,
 
   //константы попапа с добавлением новой карточки
   cardPopup,
-  popupCardForm,
-  inputCardName,
-  inputCardLink,
-  popupCardSaveButton,
-
-  //константы попапа увеличенной картинки
-  imagePopup,
-  zoomedCaption,
-  zoomedImage,
 
   //константы профиля пользователя
   profEditBtn,
-  profileName,
-  profileProfession,
   cardAddBtn,
-
-  //константы карточек
-  cardSection,
 
   //объект с нужными для валидации классами
   validationConfig
@@ -39,10 +23,15 @@ import {
 //импортируем класс карточки
 import Card from "./Card.js";
 
-//импортируем класс валидации формы
 import FormValidator from "./FormValidator.js";
 
 import Section from "./Section.js";
+
+import PopupWithForm from "./PopupWithForm.js";
+
+import PopupWithImage from "./PopupWithImage.js";
+
+import UserInfo from "./UserInfo.js";
 
 
 
@@ -62,15 +51,28 @@ const userFormValidator = new FormValidator(
 userFormValidator.enableValidation();
 
 
-//метод отрисовки карточки в разметке
+
+//метод отрисовки начальных карточкек в разметке
 const cardList = new Section ({
+
   items: initialCards,
+
   renderer: (item) => {
-    const card = new Card(item, '.card-template', openImagePopup);
-    const cardElement = card.createCard();
-    cardList.addItem(cardElement);
+    const newCard = makeCard(item)
+    cardList.addItem(newCard);
   }
+
 }, ".cards__container");
+
+
+//метод создания одной карточки
+const makeCard = (data) => {
+  const card = new Card(data, '.card-template', (image) => {
+    popupWithZoomedImage.open(image);
+  });
+
+  return card.createCard();
+}
 
 
 //выводим начальный массив карточек на экран при загрузке страницы
@@ -78,129 +80,70 @@ cardList.renderItems();
 
 
 
-//метод отрисовки карточки в разметке
-// function renderCard(item) {
-//   const card = new Card(item, '.card-template', openImagePopup);
-//   const cardElement = card.createCard();
-//   cardSection.prepend(cardElement);
-// }
+//создаём экземпляр класса PopupWithForm для попапа с вводом данных пользователя
+const popupUserEdit = new PopupWithForm({
 
-//метод создания начальных карточек из массива "initialCards"
-// function renderCardsFromInitialArray() {
-//   initialCards.reverse().forEach(renderCard);
-// }
+  popupSelector: ".popup_type_user",
 
-//выводим начальный массив карточек на экран при загрузке страницы
-// renderCardsFromInitialArray();
-
-
-
-
-//открываем попап и вешаем на него слушатели закрытия: по крестику, темной зоне и кнопки Esc
-function openPopup(popup) {
-  popup.classList.add('popup_opened');
-  document.addEventListener('keydown', closePopupByEsc);
-  popup.addEventListener('click', closePopupByDarkAreaAndCrossClick);
-}
-
-
-//закрываем попап и снимаем с него слушатели закрытия: по кнопке-крестику, тёмной зоне и кнопке Esc
-function closePopup(popup) {
-  popup.classList.remove('popup_opened');
-  document.removeEventListener("keydown", closePopupByEsc);
-  popup.removeEventListener('click', closePopupByDarkAreaAndCrossClick);
-}
-
-
-//находим открытый попап
-function findOpenedPopup() {
-  return document.querySelector(".popup_opened");
-} 
-
-
-//метод закрытия попапа по клику на тёмную зону и кнопку-крестик
-function closePopupByDarkAreaAndCrossClick (evt) {
-  if ((evt.target.classList.contains('popup_opened')) || (evt.target.classList.contains('popup__close-btn'))) {
-    closePopup(evt.currentTarget);
+  handleSubmitForm: (inputValue) => {
+    userInfo.setUserInfo(inputValue);
   }
-}
+});
+
+//вешаем слушатели на экземпляр класса PopupWithForm
+popupUserEdit.setEventListeners();
 
 
-//метод закрытия попапа по нажатаю на кнопку Esc
-function closePopupByEsc(evt) {
-  if (evt.key === "Escape") {
-    closePopup(findOpenedPopup());
+
+//создаём экземпляр класса PopupWithForm для добавления новой карточки
+const popupCardAdd = new PopupWithForm({
+
+  popupSelector: ".popup_type_card",
+
+  handleSubmitForm: (item) => {
+    const newAdedCard = makeCard(item);
+    cardList.addItem(newAdedCard);
   }
-}
+});
 
-
-//метод открытия попапа с увеличенной картинкой по клику на картинку карточки
-function openImagePopup(name, imageLink) {
-  openPopup(imagePopup);
-
-  zoomedCaption.textContent = name;
-  
-  const currentZoomedImage = zoomedImage;
-  currentZoomedImage.src = imageLink;
-  currentZoomedImage.alt = name;
-}
+//вешаем слушатели на экземпляр класса PopupWithForm
+popupCardAdd.setEventListeners();
 
 
 
+//создаём экземпляр класса PopupWithImage
+const popupWithZoomedImage = new PopupWithImage(".image-zoom");
 
-//метод редактирования информации пользователя с введёнными пользователем данными 
-//и закрытием попапа редактированния данных пользователя
-function handleProfileFormSubmit (evt) {
-  evt.preventDefault();
-  profileName.textContent = inputUserName.value ;
-  profileProfession.textContent = inputUserProfession.value ;
-  closePopup(userPopup);
-}
-
-
-//метод добавления новой карточки в разметку с введёнными пользователем данными 
-//и закрытием попапа создания карточки
-function handleCardFormSubmit (evt) {
-  evt.preventDefault();
-
-  const item = { 
-    name: inputCardName.value, 
-    link: inputCardLink.value 
-  }
-
-  cardList.addItem();
-  closePopup(cardPopup);
-}
+//вешаем слушатели на экземпляр класса PopupWithImage
+popupWithZoomedImage.setEventListeners();
 
 
 
-
-//вешаем слушатель на сабмит формы создания новой карточки
-popupCardForm.addEventListener('submit', handleCardFormSubmit);
-
-
-//вешаем слушатель на сабмит формы редактированния данных пользователя
-popupUserForm.addEventListener('submit', handleProfileFormSubmit);
+//создаём экземпляр класса UserInfo и передаём в него нужные нам данные
+const userInfo = new UserInfo({
+  userName: ".profile__name",
+  userJob: ".profile__profession"
+});
 
 
 
+//вешаем слушатель на кнопку добалвения новой карточки
 profEditBtn.addEventListener("click", () => {
 
-  openPopup(userPopup)
+  popupUserEdit.open();
 
-  inputUserName.value = profileName.textContent;
-  inputUserProfession.value = profileProfession.textContent;
+  inputUserName.value = userInfo.getUserInfo().userName;
+  inputUserProfession.value = userInfo.getUserInfo().userJob;
 
   userFormValidator.resetErrors();
 });
 
 
 
+//вешаем слушатель на кнопку редактирования профиля пользователя
 cardAddBtn.addEventListener("click", () => {
 
-  openPopup(cardPopup)
-
-  popupCardForm.reset();
+  popupCardAdd.open();
 
   cardFormValidator.resetErrors();
 });
