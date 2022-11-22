@@ -1,11 +1,11 @@
 //класс карточки с картинкой 
 export default class Card {
 
-  constructor(data, templateSelector, openImagePopup) {
-    this._name = data.name;
-    this._link = data.link;
+  constructor(data, templateSelector, handleImagePopup) {
+    this._name = data.cardName;
+    this._link = data.imgLink;
     this._templateSelector = templateSelector;
-    this._openImagePopup = openImagePopup;
+    this._handleImagePopup = handleImagePopup;
   }
 
 
@@ -48,11 +48,20 @@ export default class Card {
     this._likeBtn.classList.toggle("card__like-btn_active");
   }
 
+
   //метод удаления карточки
   _handleCardDelete() {
     this._element.remove();
   }
 
+
+  //метод открытия попапа с картинкой
+  _openImagePopup() {
+    this._handleImagePopup({
+      link: this._link,
+      name: this._name
+    });
+  }
 
 
   //вешаем слушатели на карточку
@@ -70,7 +79,7 @@ export default class Card {
 
     //слушатель открытия попапа с увеличенной картинкой карточки
     this._cardImage.addEventListener("click", () => {
-      this._openImagePopup(this._name, this._link)
+      this._openImagePopup()
     });
   
   }
