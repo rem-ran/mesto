@@ -21,20 +21,20 @@ import {
   //объект с нужными для валидации классами
   validationConfig
 
-} from "../scripts/utils/constants.js";
+} from "../utils/constants.js";
 
-//импортируем класс карточки
-import Card from "../scripts/components/Card.js";
+//импортируем классы
+import Card from "../components/Card.js";
 
-import FormValidator from "../scripts/components/FormValidator.js";
+import FormValidator from "../components/FormValidator.js";
 
-import Section from "../scripts/components/Section.js";
+import Section from "../components/Section.js";
 
-import PopupWithForm from "../scripts/components/PopupWithForm.js";
+import PopupWithForm from "../components/PopupWithForm.js";
 
-import PopupWithImage from "../scripts/components/PopupWithImage.js";
+import PopupWithImage from "../components/PopupWithImage.js";
 
-import UserInfo from "../scripts/components/UserInfo.js";
+import UserInfo from "../components/UserInfo.js";
 
 
 
@@ -46,7 +46,7 @@ const cardFormValidator = new FormValidator(
 cardFormValidator.enableValidation();
 
 
-//вызываем валидвцию формы редактирования данных пользователя
+//вызываем валидацию формы редактирования данных пользователя
 const userFormValidator = new FormValidator(
   validationConfig, 
   userPopup

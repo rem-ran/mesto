@@ -52,6 +52,7 @@ export default class Card {
   //метод удаления карточки
   _handleCardDelete() {
     this._element.remove();
+    this._element = null;
   }
 
 
