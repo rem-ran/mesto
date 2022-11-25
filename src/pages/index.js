@@ -11,12 +11,17 @@ import {
   inputUserName,
   inputUserProfession,
 
-  //константы попапа с добавлением новой карточки
+  //константа попапа с добавлением новой карточки
   cardPopup,
+
+  //константа попапа с редактированием аватарки профиля
+  avatarPopup,
 
   //константы профиля пользователя
   profEditBtn,
   cardAddBtn,
+  avatarEditBtn,
+  profileAvatar,
 
   //объект с нужными для валидации классами
   validationConfig
@@ -38,20 +43,34 @@ import UserInfo from "../components/UserInfo.js";
 
 
 
-//вызываем валидацию формы создания новой карточки
+//создаём экземпляр класса FormValidator для попапа с добавлением карточки
 const cardFormValidator = new FormValidator(
   validationConfig, 
   cardPopup
 );
+
+//вызываем валидацию формы создания новой карточки
 cardFormValidator.enableValidation();
 
 
-//вызываем валидацию формы редактирования данных пользователя
+//создаём экземпляр класса FormValidator для попапа с редактированием данных пользователя
 const userFormValidator = new FormValidator(
   validationConfig, 
   userPopup
 );
+
+//вызываем валидацию формы редактирования данных пользователя
 userFormValidator.enableValidation();
+
+
+//создаём экземпляр класса FormValidator для попапа с редактированием аватарки пользователя
+const avatarFormValidator = new FormValidator(
+  validationConfig,
+  avatarPopup
+);
+
+//вызываем валидацию формы редактирования аватарки пользователя
+avatarFormValidator.enableValidation();
 
 
 
@@ -130,7 +149,20 @@ const userInfo = new UserInfo({
 
 
 
-//вешаем слушатель на кнопку добалвения новой карточки
+//создаём экземпляр класса PopupWithForm редактирования аватарки пользователя
+const popupAvatarEdit = new PopupWithForm({
+  popupSelector: ".popup_type_avatar",
+  handleSubmitForm: (link) => {
+    profileAvatar.src = link.avatar;
+  }
+});
+
+//вешаем слушатели на экземпляр класса popupAvatarEdit
+popupAvatarEdit.setEventListeners();
+
+
+
+//вешаем "click" слушатель на кнопку добалвения новой карточки
 profEditBtn.addEventListener("click", () => {
 
   popupUserEdit.open();
@@ -143,10 +175,20 @@ profEditBtn.addEventListener("click", () => {
 
 
 
-//вешаем слушатель на кнопку редактирования профиля пользователя
+//вешаем "click" слушатель на кнопку редактирования профиля пользователя
 cardAddBtn.addEventListener("click", () => {
 
   popupCardAdd.open();
 
   cardFormValidator.resetErrors();
+});
+
+
+
+//вешаем "click" слушатель на кнопку редактирования аватарки профиля
+avatarEditBtn.addEventListener("click", () => {
+
+  popupAvatarEdit.open();
+
+  avatarFormValidator.resetErrors();
 });
