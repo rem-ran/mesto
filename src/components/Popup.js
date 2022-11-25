@@ -2,7 +2,7 @@
 //класс универсального попапа
 export default class Popup {
   constructor(popupSelector) {
-    this._popupSelector = document.querySelector(popupSelector);
+    this._popupSelector = popupSelector;
   }
 
   //метод открытия попапа

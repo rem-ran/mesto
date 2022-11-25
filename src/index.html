@@ -63,7 +63,7 @@
 
       <!-- подвал -->
       <footer class="footer">
-        <p class="footer__note">&copy; 2020 Mesto Russia</p>
+        <p class="footer__note">&copy; 2022 Mesto Russia</p>
       </footer>
 
       <!-- секция попапа с редактированием данных пользователя -->
@@ -133,7 +133,7 @@
               type="text"
               minlength="2"
               maxlength="30"
-              name="cardName"
+              name="name"
               placeholder="Название"
               required
             />
@@ -142,7 +142,7 @@
               class="popup__input popup__input_type_card-link"
               id="img-link"
               type="url"
-              name="imgLink"
+              name="link"
               placeholder="Ссылка на картинку"
               required
             />
@@ -249,10 +249,14 @@
           type="button"></button>
           <div class="card__text-box">
             <h2 class="card__heading"></h2>
-            <button 
-            class="card__like-btn" 
-            aria-label="Like" 
-            type="button"></button>
+            <div class="card__like-box">
+              <button 
+              class="card__like-btn" 
+              aria-label="Like" 
+              type="button">
+              </button>
+              <span class="card__like-counter">1</span>
+            </div>
           </div>
         </li>
       </template>

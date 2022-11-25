@@ -4,7 +4,7 @@ import './index.css';
 //импортируем константы
 import {
   //массив с начальными карточками при загрузке страницы
-  // initialCards,
+  initialCards,
 
   //константы попапа с данными пользователя
   userPopup,
@@ -57,7 +57,8 @@ const apiConfig = {
   }
 }
 
-const newApi = new Api(apiConfig);
+
+const newApi = new Api({apiConfig});
 
 
 
@@ -102,7 +103,7 @@ avatarFormValidator.enableValidation();
 //метод отрисовки начальных карточкек в разметке
 const cardList = new Section ({
 
-  // items: initialCards,
+  items: initialCards,
 
   renderer: (item) => {
     const newCard = makeCard(item)
@@ -123,7 +124,7 @@ const makeCard = (data) => {
 
 
 //выводим начальный массив карточек на экран при загрузке страницы
-// cardList.renderItems();
+cardList.renderItems();
 
 
 
@@ -147,17 +148,9 @@ const popupCardAdd = new PopupWithForm({
 
   popupSelector: cardPopup,
 
-  handleSubmitForm: (card) => {
-
-    newApi.addNewCard( {name: card.name, link: card.link} )
-      .then((newCard) => {
-        console.log(newCard);
-        const newAdedCard = makeCard(newCard);
-        cardList.addItem(newAdedCard);
-      })
-      .catch((error) => {
-        console.log(`Ошибка при добалении карточки: ${error}`);
-      })
+  handleSubmitForm: (item) => {
+    const newAdedCard = makeCard(item);
+    cardList.addItem(newAdedCard);
   }
 });
 
@@ -225,12 +218,3 @@ avatarEditBtn.addEventListener("click", () => {
 
   avatarFormValidator.resetErrors();
 });
-
-
-newApi.getAllCards()
-  .then((cards) => {
-    cardList.renderItems(cards);
-  })
-  .catch((error) => {
-    console.log(`Ошибка при первичном добалении всех карточек: ${error}`);
-  })

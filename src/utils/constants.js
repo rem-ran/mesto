@@ -1,32 +1,4 @@
 
-//массив с начальными карточками при загрузке страницы
-export const initialCards = [
-  {
-    cardName: 'Архыз',
-    imgLink: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    cardName: 'Челябинская область',
-    imgLink: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    cardName: 'Иваново',
-    imgLink: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    cardName: 'Камчатка',
-    imgLink: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    cardName: 'Холмогорский район',
-    imgLink: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    cardName: 'Байкал',
-    imgLink: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
-
 
 //константы попапа с данными пользователя
 export const userPopup = document.querySelector(".popup_type_user")
@@ -40,6 +12,10 @@ export const cardPopup = document.querySelector(".popup_type_card");
 
 //константа попапа с редактированием аватарки профиля
 export const avatarPopup = document.querySelector(".popup_type_avatar");
+
+
+//константа попапа с увеличенной картинкой
+export const imagePopup = document.querySelector(".image-zoom");
 
 
 //константы профиля пользователя
