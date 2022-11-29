@@ -3,6 +3,10 @@
 export default class Popup {
   constructor(popupSelector) {
     this._popupSelector = popupSelector;
+
+    this._saveBtn = popupSelector.querySelector(".popup__save-btn");
+    // this._saveBtnInitialTxt = "Сохранить";
+    // this._saveBtnLodingTxt = "Сохранение...";
   }
 
   //метод открытия попапа
@@ -23,6 +27,15 @@ export default class Popup {
   _handleEscClose = (evt) => {
     if (evt.key === "Escape") {
       this.close();
+    }
+  }
+
+
+  renderLoadingBtn(isLoading, loadingTxt = "Сохранение...", finalTxt = "Сохранить") {
+    if (isLoading) {
+      this._saveBtn.textContent = loadingTxt;
+    } else {
+      this._saveBtn.textContent = finalTxt;
     }
   }
 

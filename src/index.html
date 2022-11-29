@@ -25,8 +25,9 @@
           <div class="profile__image-text">
             <img
               class="profile__image"
-              src="<%=require('./images/kusto-portrait.png')%>"
-              alt="аватарка"              
+              src="#"
+              alt="аватарка"
+              name="avatar"              
             />
             <!-- кнопка редактирования аватарки профиля -->
             <button 
@@ -36,7 +37,7 @@
             </button>
             <div class="profile__text-box">
               <div class="profile__name-edit-box">
-                <h1 class="profile__name">Жак-Ив Кусто</h1>
+                <h1 class="profile__name"></h1>
                 <!-- кнопка редактирования имени и профессии профиля -->
                 <button 
                 class="profile__edit-btn" 
@@ -44,7 +45,7 @@
                 type="button">
                 </button>
               </div>
-              <p class="profile__profession">Исследователь океана</p>
+              <p class="profile__profession"></p>
             </div>
           </div>
           <!-- кнопка добавления -->
@@ -84,7 +85,7 @@
               type="text"
               minlength="2"
               maxlength="40"
-              name="userName"
+              name="name"
               placeholder="Имя"
               required
             />
@@ -95,7 +96,7 @@
               type="text"
               minlength="2"
               maxlength="200"
-              name="userJob"
+              name="about"
               placeholder="О Себе"
               required
             />
@@ -221,12 +222,19 @@
         <div class="popup__container popup__container_type_card-submit">
           <h2 class="popup__heading popup__heading_type_card-submit">Вы уверены?</h2>
             <!-- кнопка подтверждения добавления карточки -->
+          <form
+            class="popup__form popup__form_type_card-submit"
+            method="get"
+            name="card-submit"
+            novalidate
+          >
             <button
               class="popup__save-btn popup__save-btn_type_card-submit"
               type="submit"
             >
               Да
             </button>
+          </form>
           <!-- кнопка закрытия попапа без подтверждения добавления карточки -->
           <button
             class="popup__close-btn popup__close-btn_type_avatar"
@@ -237,8 +245,9 @@
         </div>
       </section>
 
+      <!-- образец карточки -->
       <template class="card-template">
-        <li class="card">
+        <li class="card" id="#">
           <img 
           class="card__image" 
           src="#" 
@@ -255,7 +264,7 @@
               aria-label="Like" 
               type="button">
               </button>
-              <span class="card__like-counter">1</span>
+              <span class="card__like-counter"></span>
             </div>
           </div>
         </li>

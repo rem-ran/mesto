@@ -18,12 +18,18 @@ export const avatarPopup = document.querySelector(".popup_type_avatar");
 export const imagePopup = document.querySelector(".image-zoom");
 
 
+export const confirmationPopup = document.querySelector(".popup_type_card-submit");
+
+
 //константы профиля пользователя
 export const profile = document.querySelector(".profile");
 export const profEditBtn = profile.querySelector(".profile__edit-btn");
 export const cardAddBtn = profile.querySelector(".profile__add-btn");
 export const profileAvatar = profile.querySelector(".profile__image");
 export const avatarEditBtn = profile.querySelector(".profile__image-edit-btn");
+export const profileName = profile.querySelector(".profile__name");
+export const profileProfession = profile.querySelector(".profile__profession");
+
 
 
 //объект с нужными для валидации классами
@@ -35,3 +41,13 @@ export const validationConfig = {
   inputErrorClass: 'popup__input_type_error',
   errorClass: 'popup__error_visible',
 };
+
+
+//объект с нужными для работы с сервером данными
+export const apiConfig = {
+  url: "https://mesto.nomoreparties.co/v1/cohort-54",
+  headers: {
+    authorization: '858bd672-ba6d-4b55-94fb-42daf32afd54',
+    'Content-Type': 'application/json'
+  }
+}
