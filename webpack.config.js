@@ -48,15 +48,15 @@ module.exports = {
         generator: {
             filename: 'images/[name].[hash][ext]',
         }
-    },
+      },
     
-    {
-      test: /\.(woff|woff2|eot|ttf|otf)$/i,
-      type: 'asset/resource',
-      generator: {
-        filename: 'fonts/[name].[hash][ext]',
-      }
-    }, 
+      {
+        test: /\.(woff|woff2|eot|ttf|otf)$/i,
+        type: 'asset/resource',
+        generator: {
+          filename: 'fonts/[name].[hash][ext]',
+        }
+      }, 
 
       {
         test: /\.css$/,

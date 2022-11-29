@@ -5,7 +5,7 @@ export default class FormValidator {
     this._validationObject = validationObject;
     this._validationElement = validationElement;
 
-    this._popupSaveButton = this._validationElement
+    this._formSaveButton = this._validationElement
     .querySelector(this._validationObject.submitButtonSelector);
 
     this._inputList = Array.from(this._validationElement
@@ -42,9 +42,9 @@ export default class FormValidator {
     if (!inputElement.validity.valid) {
       this._showInputError(inputElement, inputElement.validationMessage);
         
-      } else {
+    } else {
         this._hideInputError(inputElement);
-      }
+    }
 
   };
   
@@ -84,8 +84,9 @@ export default class FormValidator {
   _activateBtn  = () => {
     const {inactiveButtonClass} = this._validationObject;
 
-    this._popupSaveButton.classList.add(inactiveButtonClass);
-    this._popupSaveButton.setAttribute("disabled", true);
+    this._formSaveButton.classList.add(inactiveButtonClass);
+
+    this._formSaveButton.disabled = true;
   }
   
 
@@ -93,8 +94,9 @@ export default class FormValidator {
   _deactivateBtn  = () => {
     const {inactiveButtonClass} = this._validationObject;
 
-    this._popupSaveButton.classList.remove(inactiveButtonClass);
-    this._popupSaveButton.removeAttribute("disabled");
+    this._formSaveButton.classList.remove(inactiveButtonClass);
+
+    this._formSaveButton.disabled = false;
   }
   
 
@@ -114,10 +116,12 @@ export default class FormValidator {
   resetErrors() {
     
     this._inputList.forEach((inputElement) => {
+
       this._hideInputError(inputElement);
-    
-      this._toggleBtnState();
+      
     });
+    
+    this._toggleBtnState();
   };
 
 }

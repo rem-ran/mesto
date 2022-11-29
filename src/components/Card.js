@@ -1,7 +1,7 @@
 //класс карточки с картинкой 
 export default class Card {
 
-  constructor({data, templateSelector, handleImagePopup, openConfirmPopup, handleLikeClick }, userId) {
+  constructor({data, templateSelector, handleImageClick, handleDeleteClick, handleLikeClick }, userId) {
     this._name = data.name;
     this._link = data.link;
     this._likeAmount = data.likes;
@@ -9,9 +9,9 @@ export default class Card {
 
     this._templateSelector = templateSelector;
 
-    this._handleImagePopup = handleImagePopup;
+    this._handleImageClick = handleImageClick;
 
-    this._openConfirmPopup = openConfirmPopup;
+    this._handleDeleteClick = handleDeleteClick;
 
     this._handleLikeClick = handleLikeClick;
 
@@ -55,16 +55,16 @@ export default class Card {
     this._likeCounter = this._element.querySelector(".card__like-counter");
 
 
-    //если у карточки нет лайков, то 0 не отображаем
-    if (this._likeAmount.length > 0){
-      this._likeCounter.textContent = this._likeAmount.length;
-    }
+    this._likeCounter.textContent = this._likeAmount.length;
+
     
     this._handleDeleteBtnIcon();
+
 
     if (this._myLike) {
       this._likeBtn.classList.add("card__like-btn_active");
     }
+
 
     this._setListenersForCard();
 
@@ -82,7 +82,7 @@ export default class Card {
 
 
   //метод постановки и снятия лайка
-  _handleCardeLike() {
+  _handleCardLike() {
     this._handleLikeClick(this._myLike);
   }
 
@@ -95,8 +95,8 @@ export default class Card {
 
 
   //метод открытия попапа с картинкой
-  _openImagePopup() {
-    this._handleImagePopup({
+  _handleImageZoom() {
+    this._handleImageClick({
       link: this._link,
       name: this._name
     });
@@ -109,20 +109,15 @@ export default class Card {
 
     this._likeCounter.textContent = likeAmount;
 
-    this._myLike = true;
-}
+    this._myLike = true;    
+  }
 
 
 //метод снятия лайка с карточки
   removeCardLike(likeAmount) {
     this._likeBtn.classList.remove("card__like-btn_active");
-    
-    //если количество лайков карточки становится 0, то 0 не отображаем
-    if (likeAmount === 0) {
-      this._likeCounter.textContent = "";
-    } else {
-      this._likeCounter.textContent = likeAmount;
-    }
+
+    this._likeCounter.textContent = likeAmount;
 
     this._myLike = false;
   }
@@ -133,17 +128,17 @@ export default class Card {
 
     //слушатель лайка карточки
     this._likeBtn.addEventListener("click", () => {
-      this._handleCardeLike();
+      this._handleCardLike();
     });
 
     //слушатель удаления карточки
     this._deleteBtn.addEventListener("click", () => {
-      this._openConfirmPopup();
+      this._handleDeleteClick();
     });
 
     //слушатель открытия попапа с увеличенной картинкой карточки
     this._cardImage.addEventListener("click", () => {
-      this._openImagePopup()
+      this._handleImageZoom()
     });
   
   }
