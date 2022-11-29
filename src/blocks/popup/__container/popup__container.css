@@ -2,17 +2,21 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding-left: 36px;
-  padding-right: 36px;
+  padding: 34px 36px 36px 36px;
   border-radius: 10px;
   background-color: #ffffff;
   z-index: 1;
   position: relative;
+  width: 358px;
+  min-height: 111px;
+  align-items: stretch;
+  justify-content: space-between;
+
 }
 
 @media screen and (max-width: 767px) {
   .popup__container {
-    padding-left: 22px;
-    padding-right: 22px;
+    padding: 25px 22px 25px 22px;
+    width: 238px;
   }
 }

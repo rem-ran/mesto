@@ -6,7 +6,9 @@
     <title>Место</title>
   </head>
   <body class="page">
+
     <div class="page__content">
+      
       <!-- шапка -->
       <header class="header">
         <img
@@ -15,18 +17,27 @@
           alt="логотип Mesto Russia белого цвета"
         />
       </header>
+
       <main>
+
         <!-- секция профиля -->
         <section class="profile">
           <div class="profile__image-text">
             <img
               class="profile__image"
-              src="<%=require('./images/kusto-portrait.png')%>"
+              src="#"
               alt="аватарка"
+              name="avatar"              
             />
+            <!-- кнопка редактирования аватарки профиля -->
+            <button 
+            class="profile__image-edit-btn" 
+            aria-label="Edit" 
+            type="button">
+            </button>
             <div class="profile__text-box">
               <div class="profile__name-edit-box">
-                <h1 class="profile__name">Жак-Ив Кусто</h1>
+                <h1 class="profile__name"></h1>
                 <!-- кнопка редактирования имени и профессии профиля -->
                 <button 
                 class="profile__edit-btn" 
@@ -34,7 +45,7 @@
                 type="button">
                 </button>
               </div>
-              <p class="profile__profession">Исследователь океана</p>
+              <p class="profile__profession"></p>
             </div>
           </div>
           <!-- кнопка добавления -->
@@ -48,12 +59,15 @@
         <section class="cards">
           <ul class="cards__container"></ul>
         </section>
+
       </main>
+
       <!-- подвал -->
       <footer class="footer">
-        <p class="footer__note">&copy; 2020 Mesto Russia</p>
+        <p class="footer__note">&copy; 2022 Mesto Russia</p>
       </footer>
-      <!-- секция с попапом -->
+
+      <!-- секция попапа с редактированием данных пользователя -->
       <section class="popup popup_type_user form">
         <div class="popup__container popup__container_type_user">
           <h2 class="popup__heading popup__heading_type_user">
@@ -71,7 +85,7 @@
               type="text"
               minlength="2"
               maxlength="40"
-              name="userName"
+              name="name"
               placeholder="Имя"
               required
             />
@@ -82,11 +96,12 @@
               type="text"
               minlength="2"
               maxlength="200"
-              name="userJob"
+              name="about"
               placeholder="О Себе"
               required
             />
             <span class="user-job-error popup__error"></span>
+            <!-- кнопка сохранения данных -->
             <button
               class="popup__save-btn popup__save-btn_type_user"
               type="submit"
@@ -94,7 +109,7 @@
               Сохранить
             </button>
           </form>
-          <!-- кнопка закрытия попапа без созранения данных -->
+          <!-- кнопка закрытия попапа без сохранения данных -->
           <button
             class="popup__close-btn popup__close-btn_type_user"
             type="button"
@@ -102,6 +117,8 @@
           ></button>
         </div>
       </section>
+
+      <!-- секция попапа с добавлением карточки -->
       <section class="popup popup_type_card form">
         <div class="popup__container popup__container_type_card">
           <h2 class="popup__heading popup__heading_type_card">Новое место</h2>
@@ -117,7 +134,7 @@
               type="text"
               minlength="2"
               maxlength="30"
-              name="cardName"
+              name="name"
               placeholder="Название"
               required
             />
@@ -126,11 +143,12 @@
               class="popup__input popup__input_type_card-link"
               id="img-link"
               type="url"
-              name="imgLink"
+              name="link"
               placeholder="Ссылка на картинку"
               required
             />
             <span class="img-link-error popup__error"></span>
+            <!-- кнопка добавления карточки -->
             <button
               class="popup__save-btn popup__save-btn_type_card"
               type="submit"
@@ -138,7 +156,7 @@
               Создать
             </button>
           </form>
-          <!-- кнопка закрытия попапа -->
+          <!-- кнопка закрытия попапа без добавления карточки -->
           <button
             class="popup__close-btn popup__close-btn_type_card"
             aria-label="Close"
@@ -146,6 +164,8 @@
           ></button>
         </div>
       </section>
+
+      <!-- секция попапа с увеличенной картинкой -->
       <section class="popup image-zoom">
         <figure class="image-zoom__container">
           <img 
@@ -160,8 +180,74 @@
           <figcaption class="image-zoom__caption"></figcaption>
         </figure>
       </section>
+
+      <!-- секция попапа с редактированием аватарки профиля -->
+      <section class="popup popup_type_avatar form">
+        <div class="popup__container popup__container_type_avatar">
+          <h2 class="popup__heading popup__heading_type_avatar">Обновить аватар</h2>
+          <form
+            class="popup__form popup__form_type_avatar"
+            method="get"
+            name="avatar-data"
+            novalidate
+          >
+            <input
+              class="popup__input popup__input_type_avatar-link"
+              id="avatar-link"
+              type="url"
+              name="avatar"
+              placeholder="Ссылка на аватарку"
+              required
+            />
+            <span class="avatar-link-error popup__error"></span>
+            <!-- кнопка добавления аватарки -->
+            <button
+              class="popup__save-btn popup__save-btn_type_avatar"
+              type="submit"
+            >
+              Сохранить
+            </button>
+          </form>
+          <!-- кнопка закрытия попапа без обновления аватарки -->
+          <button
+            class="popup__close-btn popup__close-btn_type_avatar"
+            aria-label="Close"
+            type="button"
+          ></button>
+        </div>
+      </section>
+
+      <!-- секция попапа с подтверждением добавления карточки -->
+      <section class="popup popup_type_card-submit">
+        <div class="popup__container popup__container_type_card-submit">
+          <h2 class="popup__heading popup__heading_type_card-submit">Вы уверены?</h2>
+            <!-- кнопка подтверждения добавления карточки -->
+          <form
+            class="popup__form popup__form_type_card-submit"
+            method="get"
+            name="card-submit"
+            novalidate
+          >
+            <button
+              class="popup__save-btn popup__save-btn_type_card-submit"
+              type="submit"
+            >
+              Да
+            </button>
+          </form>
+          <!-- кнопка закрытия попапа без подтверждения добавления карточки -->
+          <button
+            class="popup__close-btn popup__close-btn_type_avatar"
+            aria-label="Close"
+            type="button"
+          >
+        </button>
+        </div>
+      </section>
+
+      <!-- образец карточки -->
       <template class="card-template">
-        <li class="card">
+        <li class="card" id="#">
           <img 
           class="card__image" 
           src="#" 
@@ -172,13 +258,19 @@
           type="button"></button>
           <div class="card__text-box">
             <h2 class="card__heading"></h2>
-            <button 
-            class="card__like-btn" 
-            aria-label="Like" 
-            type="button"></button>
+            <div class="card__like-box">
+              <button 
+              class="card__like-btn" 
+              aria-label="Like" 
+              type="button">
+              </button>
+              <span class="card__like-counter"></span>
+            </div>
           </div>
         </li>
       </template>
+
     </div>
+
   </body>
 </html>

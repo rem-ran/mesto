@@ -2,15 +2,12 @@
   margin: 0;
   display: flex;
   flex-direction: column;
-  width: 358px;
-  margin-bottom: 37px;
-  margin-top: 39px;
+  margin-top: 48px;
+  justify-content: flex-start;
 }
 
 @media screen and (max-width: 767px) {
   .popup__form {
-    width: 238px;
-    margin-bottom: 25px;
-    margin-top: 45px;
+    margin-top: 75px;
   }
 }
