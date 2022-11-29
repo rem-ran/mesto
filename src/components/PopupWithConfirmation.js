@@ -2,17 +2,26 @@
 import Popup from "./Popup.js";
 
 export default class PopupWithConfirmation extends Popup {
-  constructor(popupSelector, handleSubmitForm) {
-    super(popupSelector);
+  constructor(popup, handleSubmitForm) {
+    super(popup);
     
     this._handleSubmitForm = handleSubmitForm;
-    this._form = this._popupSelector.querySelector('.popup__form');
+    this._form = this._popup.querySelector('.popup__form');
+
+    this._saveBtn = this._popup.querySelector(".popup__save-btn");
   }
 
+  
   open(data) {
     this._data = data;
     super.open();
   }
+
+
+  renderLoadingBtn(buttonText) {
+    this._saveBtn.textContent = buttonText;
+  }
+
 
   setEventListeners() {
 
