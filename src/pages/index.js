@@ -4,9 +4,7 @@ import './index.css';
 
 //импортируем константы
 import {
-  //массив с начальными карточками при загрузке страницы
-  // initialCards,
-
+  
   //константы попапа с данными пользователя
   userPopup,
   inputUserName,
@@ -98,10 +96,13 @@ avatarFormValidator.enableValidation();
 // метод отрисовки начальных карточкек в разметке
 const cardSection = new Section ({
 
-  renderer: (item, userId) => {
+  renderer: (item) => {
 
-    const newCard = makeCard(item, userId)
-    cardSection.addItem(newCard);
+    const userData = userInfo.getUserInfo();
+
+    const newCard = makeCard(item, userData._id)
+
+    cardSection.addItemLast(newCard);
 
   }
 
@@ -121,6 +122,24 @@ const userInfo = new UserInfo({
 // метод создания одной карточки
 const makeCard = (cardData, userId) => {
 
+  const handleDeleteCard = () =>  {
+
+    popupWithCardDeleteConfirm.renderLoadingBtn("Удаление...");
+    
+    api.deleteCard(cardData._id)
+      .then(() => card.handleCardDelete())
+  
+      .then(() => popupWithCardDeleteConfirm.close())
+  
+      .catch((error) => {
+        console.log(`Ошибка при удалении карточки: ${error}`);
+      })
+  
+      .finally(() => {
+        popupWithCardDeleteConfirm.renderLoadingBtn("Да");
+      })
+  }
+
   const card = new Card({
 
     data: cardData, 
@@ -130,10 +149,10 @@ const makeCard = (cardData, userId) => {
     handleImageClick: (image) => { popupWithZoomedImage.open(image) },
 
     handleDeleteClick: () => { 
-      popupWithCardDeleteConfirm.open({
-        id: cardData._id,
-        handleSubmitForm: () => card.handleCardDelete()
-      }) 
+      popupWithCardDeleteConfirm.open(),
+
+      popupWithCardDeleteConfirm.setCallback(handleDeleteCard)
+
     },
 
     handleLikeClick: (likeMe) =>{
@@ -214,7 +233,7 @@ const popupCardAdd = new PopupWithForm({
 
       .then((newCard) => {
         const newAddedCard = makeCard(newCard, newCard.owner._id);
-        cardSection.addItem(newAddedCard);
+        cardSection.addItemFirst(newAddedCard);
         popupCardAdd.close();
       })
       
@@ -276,26 +295,10 @@ popupAvatarEdit.setEventListeners();
 
 
 
+
 //создаём экземпляр класса PopupWithConfirmation для подтверждения удаления своей карточки
 const popupWithCardDeleteConfirm = new PopupWithConfirmation(
-
-  confirmationPopup, 
-
-  ({ id, handleSubmitForm }) => {
-    popupWithCardDeleteConfirm.renderLoadingBtn("Удаление...");
-    api.deleteCard(id)
-      .then(() => handleSubmitForm())
-
-      .then(() => popupWithCardDeleteConfirm.close())
-
-      .catch((error) => {
-        console.log(`Ошибка при удалении карточки: ${error}`);
-      })
-
-      .finally(() => {
-        popupWithCardDeleteConfirm.renderLoadingBtn("Да");
-      })
-  }
+  confirmationPopup 
 );
 
 //вешаем слушатели на экземпляр класса PopupWithConfirmation
@@ -346,11 +349,12 @@ avatarEditBtn.addEventListener("click", handleAvatarPopupOpening);
 //загружаем информацию о пользователе и начальные карточки с сервера на начальный экран
 api.getDataForInitialLoading()
   .then(([userData, cards]) => {
-    const userId = userData._id;
+
     userInfo.setUserInfo(userData);
     userInfo.setUserAvatar(userData);
+    userInfo.setUserId(userData);
 
-    cardSection.renderItems(cards, userId);
+    cardSection.renderItems(cards);
 
   })
 

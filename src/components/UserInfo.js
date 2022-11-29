@@ -11,7 +11,8 @@ export default class UserInfo {
     const userData = {
       name: this._name.textContent,
       about: this._about.textContent,
-      avatar: this._avatar.src
+      avatar: this._avatar.src,
+      _id: this._userId
     }
     return userData;
   }
@@ -26,4 +27,9 @@ export default class UserInfo {
   setUserAvatar(data) {
     this._avatar.src = data.avatar;
   }
+
+  setUserId(data) {
+    this._userId = data._id;
+  }
+
 }
